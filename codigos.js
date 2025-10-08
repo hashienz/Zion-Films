@@ -1,5 +1,5 @@
 /**
- * @file Script principal para o site Portfólio Videomaker.
+ * @file Script principal para o site
  * @description Inicializa todas as bibliotecas e funcionalidades interativas do site.
  * @version 2.0.0
  */
@@ -22,7 +22,7 @@ function main() {
 }
 
 /**
- * Inicializa a biblioteca AOS (Animate On Scroll) para as animações de entrada.
+ * Inicializa a biblioteca AOS para as animações de entrada.
  * Este sistema substitui o IntersectionObserver manual.
  */
 function initAOS() {
@@ -43,21 +43,20 @@ function initGLightbox() {
         loop: true,
         // Evento que é disparado toda vez que um slide é aberto
         onOpen: () => {
-            const currentSlide = lightbox.getActiveSlide();
-            const slideNode = currentSlide.slide; // O elemento HTML do slide
-            const videoFormat = slideNode.querySelector('a').dataset.format;
-
-            // Se o link do slide tiver nosso 'data-format="vertical"'
-            if (videoFormat === 'vertical') {
-                // Adicionamos uma classe ao modal principal da galeria
-                document.querySelector('.g-modal').classList.add('vertical-mode');
-            }
+            // Pega o elemento que disparou o lightbox (o nosso link <a>)
+            const triggerElement = lightbox.getActiveSlide().trigger;
+            
+            // Verifica se o link tem o nosso 'data-format="vertical"'
+            // if (triggerElement && triggerElement.dataset.format === 'vertical') {
+            //     // Adicionamos a classe ao modal principal da galeria
+            //     document.querySelector('.g-modal').classList.add('vertical-mode');
+            // }
         },
         // Evento que é disparado antes de fechar o slide
-        onClose: () => {
-            // Removemos a classe para que não afete o próximo vídeo se ele for horizontal
-            document.querySelector('.g-modal').classList.remove('vertical-mode');
-        }
+        // onClose: () => {
+        //     // Removemos a classe para que não afete o próximo vídeo se ele for horizontal
+        //     document.querySelector('.g-modal').classList.remove('vertical-mode');
+        // }
     });
 }
 
