@@ -94,14 +94,20 @@ h2 {
 /* ------------------------------------------------------------------- */
 
 header {
-  background-color: var(--neutral-color);
+  background-color: hidden;   
   padding: 1rem 0;
   position: sticky; /* Mantém o header fixo no topo ao rolar */
   top: 0;
   z-index: 1000; /* Garante que o header fique acima de outros elementos */
   box-shadow: var(--shadow);
+    transform: translateY(0); 
+  transition: transform 0.4s ease-in-out; 
+  height: 100px;
 }
-
+header.header-hidden {
+  /* Move o header 100% da sua própria altura para cima, escondendo-o */
+  transform: translateY(-100%);
+}
 header nav {
   display: flex;
   justify-content: space-between; /* Coloca a logo de um lado e os links do outro */
@@ -156,7 +162,7 @@ header nav a.active {
 
 .logo-img {
   /* Define uma altura fixa para a logo. Ajuste este valor como preferir. */
-  height: 70px; 
+  height: 100px; 
   
   /* A largura se ajustará automaticamente para manter a proporção */
   width: auto; 

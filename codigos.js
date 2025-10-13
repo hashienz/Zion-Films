@@ -19,6 +19,7 @@ function main() {
     initSwiper();
     initSmoothScroll();
     initScrollBasedFeatures();
+    initAutoHideHeader();
 }
 
 /**
@@ -179,4 +180,33 @@ function toggleBackToTopButton(scrollY, backToTopBtn) {
     } else {
         backToTopBtn.classList.remove('show');
     }
+}
+function initAutoHideHeader() {
+    // Pega o elemento do cabeçalho
+    const header = document.querySelector('header');
+    if (!header) return; // Encerra se não encontrar o header
+
+    let lastScrollTop = 0; // Variável para armazenar a posição anterior do scroll
+
+    window.addEventListener('scroll', function() {
+        // Pega a posição atual do scroll vertical
+        let currentScroll = window.scrollY || document.documentElement.scrollTop;
+
+        // Condição para só ativar o efeito após rolar um pouco para baixo
+        if (currentScroll > 100) { 
+            if (currentScroll > lastScrollTop) {
+                // Rolando para BAIXO: esconde o header
+                header.classList.add('header-hidden');
+            } else {
+                // Rolando para CIMA: mostra o header
+                header.classList.remove('header-hidden');
+            }
+        } else {
+            // Se estiver perto do topo, sempre mostra o header
+            header.classList.remove('header-hidden');
+        }
+
+        // Atualiza a última posição do scroll para a próxima verificação
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    }, false);
 }
