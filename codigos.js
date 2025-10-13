@@ -93,7 +93,6 @@ function initSwiper() {
 /**
  * Configura a rolagem suave ao clicar nos links do menu de navegação.
  * Esta função é opcional se o `scroll-behavior: smooth` no CSS for suficiente,
- * mas ela garante compatibilidade com navegadores mais antigos.
  */
 function initSmoothScroll() {
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
@@ -184,9 +183,9 @@ function toggleBackToTopButton(scrollY, backToTopBtn) {
 function initAutoHideHeader() {
     // Pega o elemento do cabeçalho
     const header = document.querySelector('header');
-    if (!header) return; // Encerra se não encontrar o header
+    if (!header) return; 
 
-    let lastScrollTop = 0; // Variável para armazenar a posição anterior do scroll
+    let lastScrollTop = 0; 
 
     window.addEventListener('scroll', function() {
         // Pega a posição atual do scroll vertical
