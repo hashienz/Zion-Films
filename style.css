@@ -94,7 +94,7 @@ h2 {
 /* ------------------------------------------------------------------- */
 
 header {
-  background-color: hidden;   
+  background-color: black;   
   padding: 1rem 0;
   position: sticky; /* Mantém o header fixo no topo ao rolar */
   top: 0;
