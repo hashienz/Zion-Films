@@ -26,6 +26,7 @@
   --neutral-color: #1f1f1f;
   --font-main: 'Poppins', sans-serif;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --neon-green: #39ff14;
 }
 
 /* Reset básico para remover margens e paddings padrão dos navegadores */
@@ -669,7 +670,104 @@ footer {
   font-size: 0.9rem;
   color: #aaa;
 }
+.btn-whatsapp-glow {
+  /* Layout para alinhar o ícone e o texto */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px; /* Espaço entre o ícone e o texto */
 
+  /* Visual */
+  background-color: var(--neon-green);
+  color: #fff; /* Cor do texto (branco) */
+  padding: 14px 28px; /* Espaçamento interno (altura e largura) */
+  border-radius: 50px; /* Deixa as bordas totalmente redondas */
+  border: none;
+  
+  /* Tipografia */
+  font-family: var(--font-main); /* Usa a fonte 'Poppins' do seu site */
+  font-weight: 700; /* Negrito */
+  text-decoration: none; /* Remove sublinhado do link */
+  text-transform: uppercase; /* ORÇAMENTO WHATSAPP */
+  letter-spacing: 1px;
+  
+  /* EFEITO DE BRILHO (GLOW) */
+  /* Esta é a mágica: x-offset | y-offset | blur-radius | spread-radius | color */
+  box-shadow: 0 0 20px 2px rgba(57, 255, 20, 0.6); /* 0.6 = 60% de opacidade */
+  
+  /* Animações */
+  transition: all 0.3s ease-in-out;
+}
+
+/* 3. Estilo do ícone SVG */
+.btn-whatsapp-glow .whatsapp-icon {
+  width: 22px;
+  height: 22px;
+  fill: #fff; /* Cor do ícone (branco) */
+}
+
+/* 4. Efeito ao passar o mouse (hover) */
+.btn-whatsapp-glow:hover {
+  /* Aumenta um pouco o botão */
+  transform: scale(1.05);
+  
+  /* Intensifica o brilho */
+  box-shadow: 0 0 35px 8px rgba(57, 255, 20, 0.8);
+}
+.btn-whatsapp-glow {
+    /* ... (todos os estilos que você já colocou) ... */
+    animation: pulse-glow 2s infinite alternate;
+}
+
+.contato-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    
+    /* A MÁGICA DO GHOST BUTTON */
+    background: transparent; /* Fundo transparente */
+    border: 2px solid var(--accent-color); /* Borda com sua cor de destaque */
+    color: var(--accent-color); /* Texto com sua cor de destaque */
+    
+    /* Transição suave para o efeito hover */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* O ícone SVG dentro do botão */
+.contato-link .contato-svg-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--accent-color); /* Cor do ícone */
+    transition: fill 0.3s ease; /* Transição suave para o hover */
+}
+
+/* EFEITO AO PASSAR O MOUSE */
+.contato-link:hover {
+    background-color: var(--accent-color); /* Preenche o fundo */
+    color: #000; /* Texto fica preto (para contraste) */
+}
+
+.contato-link:hover .contato-svg-icon {
+    fill: #000; /* Ícone também fica preto */
+}
+
+
+
+/* Definição da animação*/
+@keyframes pulse-glow {
+  /* Estado inicial (brilho normal) */
+  from {
+    box-shadow: 0 0 20px 2px rgba(57, 255, 20, 0.6);
+  }
+  /* Estado final (brilho intenso) */
+  to {
+    box-shadow: 0 0 35px 8px rgba(57, 255, 20, 0.8);
+  }
+}
 
 /* --- 9. ELEMENTOS INTERATIVOS --- */
 /* ------------------------------------------------------------------- */
@@ -719,6 +817,21 @@ footer {
 /* Estilos para telas com largura máxima de 768px (tablets e celulares) */
 @media (max-width: 768px) {
     
+  /* Esconde o menu de navegação normal em telas pequenas
+     (aqui entraria a lógica de um menu hambúrguer) */
+  header nav ul {
+   display: none;
+  }
+  
+  /* Ajusta a largura do slide do portfólio para ocupar mais a tela */
+  .swiper-slide {
+    width: 80%;
+  }
+
+  /* Faz com que os cards de serviço ocupem uma coluna só */
+  .servicos-grid {
+    grid-template-columns: 1fr;
+  }
     .g-modal.vertical-mode .gslide-media {
         height: 80vh;
         max-width: none;
