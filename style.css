@@ -94,59 +94,63 @@ h2 {
 /* ------------------------------------------------------------------- */
 
 header {
-  background-color: black;   
-  padding: 1rem 0;
-  position: sticky; /* Mantém o header fixo no topo ao rolar */
-  top: 0;
-  z-index: 1000; /* Garante que o header fique acima de outros elementos */
-  box-shadow: var(--shadow);
-    transform: translateY(0); 
-  transition: transform 0.4s ease-in-out; 
-  height: 100px;
+  background-color: var(--neutral-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+    
+    /* 1. Define uma altura fixa e elegante para a barra */
+    height: 70px;
+    
+    /* 2. Garante que a logo (que será maior) possa "transbordar" */
+    position: relative;
 }
 header.header-hidden {
-  /* Move o header 100% da sua própria altura para cima, escondendo-o */
   transform: translateY(-100%);
 }
 header nav {
-  display: flex;
-  justify-content: space-between; /* Coloca a logo de um lado e os links do outro */
-  align-items: center; /* Alinha verticalmente os itens */
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Centraliza os links do menu verticalmente */
 }
 
 header nav ul {
-  display: flex;
-  list-style: none; /* Remove os marcadores da lista */
-  gap: 1.5rem; /* Espaço entre os links */
+  /* 9. Adiciona uma margem à esquerda do menu para
+       não bater na logo de 100px. Ajuste 130px se precisar. */
+    margin-left: 130px; 
+    
+    /* (Mantenha seus outros estilos de 'ul' aqui) */
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
 }
 
-header nav a {
+header nav ul a {
   color: var(--text-color);
-  text-decoration: none; /* Remove o sublinhado padrão */
-  font-weight: 500;
-  position: relative; /* Necessário para o efeito de sublinhado animado */
-  padding: 4px 0;
-  transition: color 0.3s ease;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding: 4px 0;
 }
 
 /* Efeito de sublinhado que aparece ao passar o mouse */
-header nav a::after {
+header nav ul a::after {
   content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--accent-color);
-  transform: scaleX(0); /* Começa invisível (escala 0) */
-  transform-origin: right;
-  transition: transform 0.3s ease;
+    position: absolute;
+    left: 0;
+    bottom: -5px; /* Posição da barra */
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
-header nav a:hover::after,
-header nav a:focus::after {
-  transform: scaleX(1); /* Fica visível (escala 1) */
-  transform-origin: left;
+header nav ul a:hover::after {
+    transform: scaleX(1);
 }
 
 /* Classe adicionada via JS para destacar o link da seção atual */
@@ -156,30 +160,49 @@ header nav a.active {
 
 /* --- ESTILOS DA LOGO NO CABEÇALHO --- */
 .logo-link {
-  /* Garante que o link não tenha decorações estranhas */
-  text-decoration: none; 
+ /* 4. Tira a logo do fluxo normal da página */
+    position: absolute;
+    
+    /* 5. Posiciona a logo: 50% para baixo a partir do topo */
+    top: 50%;
+    
+    /* 6. Puxa a logo 50% para cima (baseado no seu próprio tamanho)
+       Resultado: A logo fica perfeitamente centrada na barra de 70px */
+    transform: translateY(-50%);
+    
+    /* 7. Necessário para a animação da barra */
+    display: inline-block;
+    text-decoration: none; 
 }
-
 .logo-img {
-  /* Define uma altura fixa para a logo. Ajuste este valor como preferir. */
-  height: 100px; 
-  
-  /* A largura se ajustará automaticamente para manter a proporção */
-  width: auto; 
-
-  /* Garante que a imagem se alinhe bem com os links do menu */
-  vertical-align: middle; 
+    height: 100px; 
+    width: auto;
 }
+/* .logo-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color);
+    bottom: -10px; 
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease-in-out;
+} */
 
+.logo-link:hover::after {
+    transform: scaleX(1);
+}
 
 /* --- ESTILOS DA SEÇÃO SOBRE MIM --- */
 
 /* Layout principal com 2 colunas: foto e texto */
 .sobre-mim-layout {
   display: grid;
-  grid-template-columns: 1fr 2fr; /* A foto ocupa 1 parte, o texto 2 partes */
-  align-items: center; /* Alinha verticalmente a foto e o texto */
-  gap: 3rem; /* Espaço entre a foto e o texto */
+  grid-template-columns: 1fr 2fr; 
+  align-items: center; 
+  gap: 3rem; 
 }
 
 /* Estilo da imagem */
