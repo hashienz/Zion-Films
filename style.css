@@ -49,7 +49,9 @@ body {
   line-height: 1.6; /* Espaçamento entre linhas para melhor legibilidade */
   overflow-x: hidden; /* Impede a rolagem horizontal indesejada */
 }
-
+body, html {
+    overflow-x: hidden;
+}
 
 /* --- 2. CLASSES UTILITÁRIAS --- */
 /* ------------------------------------------------------------------- */
@@ -58,14 +60,15 @@ body {
 .container {
   max-width: 1200px;
   margin: auto; /* Truque para centralizar horizontalmente */
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* Define o espaçamento vertical padrão para as seções */
 section {
   padding-top: 7rem;
   padding-bottom: 7rem;
+  overflow: hidden;
 }
 
 /* Título principal de cada seção */
@@ -299,6 +302,7 @@ header nav a.active {
   align-items: center;
   justify-content: center;
   padding: 0; /* Remove o padding padrão da seção */
+  overflow: hidden;
 }
 
 /* Vídeo de fundo */
@@ -692,8 +696,7 @@ footer {
   letter-spacing: 1px;
   
   /* EFEITO DE BRILHO (GLOW) */
-  /* Esta é a mágica: x-offset | y-offset | blur-radius | spread-radius | color */
-  box-shadow: 0 0 20px 2px rgba(57, 255, 20, 0.6); /* 0.6 = 60% de opacidade */
+  box-shadow: 0 0 12px 2px rgba(75, 141, 64, 0.4);
   
   /* Animações */
   transition: all 0.3s ease-in-out;
@@ -759,13 +762,12 @@ footer {
 
 /* Definição da animação*/
 @keyframes pulse-glow {
-  /* Estado inicial (brilho normal) */
   from {
-    box-shadow: 0 0 20px 2px rgba(57, 255, 20, 0.6);
+    box-shadow: 0 0 12px 2px rgba(57, 255, 20, 0.4);  
   }
-  /* Estado final (brilho intenso) */
+
   to {
-    box-shadow: 0 0 35px 8px rgba(57, 255, 20, 0.8);
+    box-shadow: 0 0 18px 4px rgba(57, 255, 20, 0.5); 
   }
 }
 
@@ -816,9 +818,7 @@ footer {
 
 /* Estilos para telas com largura máxima de 768px (tablets e celulares) */
 @media (max-width: 768px) {
-    
-  /* Esconde o menu de navegação normal em telas pequenas
-     (aqui entraria a lógica de um menu hambúrguer) */
+
   header nav ul {
    display: none;
   }
