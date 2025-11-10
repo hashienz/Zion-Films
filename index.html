@@ -5,37 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Portfólio de ZionFilms - Videomaker. Produção de clipes, vídeos para eventos e comerciais." />
     <title>ZionFilms | Produtora Audiovisual</title>
-    <link rel="icon" type="image/png" href="img/IMG_2722.PNG" sizes="99x99" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
     
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- CSS das Bibliotecas -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     
+    <!-- CSS Principal -->
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     
     <header>
         <nav class="container">
-            <a href="#inicio" class="logo-link">
-                <img src="img/LogoSemFundo.PNG" alt="Logo da ZionFilms" class="logo-img">
-            </a>
-            <ul>
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#portfolio">Portfólio</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
+        
+        <a href="#inicio" class="logo-link">
+            <img src="img/LogoSemFundo.PNG" alt="Logo da ZionFilms" class="logo-img">
+        </a>
+
+        <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#portfolio">Portfólio</a></li>
+            <li><a href="#contato">Contato</a></li>
+
+            <div class="menu-drawer-footer">
+                <hr class="menu-divider">
+                <div class="social-icons-menu">
+                    <a href="https://www.instagram.com/zionfilms.audiovisual/" target="_blank" aria-label="Instagram">
+                        <svg viewBox="0 0 448 512" fill="currentColor" height="1em" width="1em">
+                            <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9 26.3 26.2 58 34.4 93.9 36.2 37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1 9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+                        </svg>
+                    </a>
+                    </div>
+                <p class="copyright-menu">© 2024 ZionFilms</p>
+            </div>
+        </ul>
+
+        <button class="menu-hamburger" aria-label="Abrir menu" aria-expanded="false">
+            <span class="linha"></span>
+            <span class="linha"></span>
+            <span class="linha"></span>
+        </button>
+    </nav>
     </header>
 
     <main>
@@ -47,12 +74,12 @@
                 <h2>Capturando emoções em movimento</h2>
                 <p>Produção de vídeos para clipes, eventos e comerciais.</p>
                  <div class="client-logos">
-        <p class="logos-title">Trabalhos realizados para:</p>
-        <div class="logo-images">
-            <img src="img/logo.png" alt="Logo da Servopa">
-            <img src="img/chevrolet-valesul.avif" alt="Logo da Chevrolet">
-            </div>
-    </div>
+                    <p class="logos-title">Trabalhos realizados para:</p>
+                    <div class="logo-images">
+                        <img src="img/logo.png" alt="Logo da Servopa">
+                        <img src="img/chevrolet-valesul.avif" alt="Logo da Chevrolet">
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -60,21 +87,18 @@
             <h2>Somos a ZionFilms</h2>
             <div class="sobre-mim-layout">
                 <div class="sobre-mim-foto" data-aos="fade-right">
-                    <img src="img/logoFundoPreto.PNG" alt="Foto de Matheus, videomaker da ZionFilms">
+                    <img src="img/logoFundoPreto.PNG" alt="Logo da ZionFilms">
                 </div>
                 <div class="sobre-mim-texto" data-aos="fade-left">
                     <h3>Contando Histórias que Conectam</h3>
-                    <p>ZionFilms é mais do que uma produtora audiovisual, é um olhar sensível sobre cada história.
-                    Acreditamos que cada cena carrega emoção, propósito e verdade. Por isso, transformamos momentos 
-                    simples em memórias inesquecíveis e ideias em experiências visuais que conectam pessoas.
-                    Nosso foco é contar histórias com autenticidade, criatividade e excelência, 
-                    valorizando cada detalhe e cada cliente como parte da nossa jornada.</p>
+                    <p>ZionFilms é mais do que uma produtora audiovisual, é um olhar sensível sobre cada história. Acreditamos que cada cena carrega emoção, propósito e verdade. Por isso, transformamos momentos simples em memórias inesquecíveis e ideias em experiências visuais que conectam pessoas. Nosso foco é contar histórias com autenticidade, criatividade e excelência, valorizando cada detalhe e cada cliente como parte da nossa jornada.</p>
                     <a href="#contato" class="cta-button">Vamos criar juntos?</a>
                 </div>
             </div>
             <div class="processo-container" data-aos="fade-up">
-                <h3 class="subtitulo-secao">Meu Processo de Trabalho</h3>
+                <h3 class="subtitulo-secao">Nosso Processo de Trabalho</h3>
                 <div class="processo-grid">
+                    <!-- CORRIGIDO: Atraso em cascata (100, 200, 300, 400) para animação fluida -->
                     <div class="processo-item" data-aos="fade-up" data-aos-delay="100">
                         <div class="processo-icone">📋</div>
                         <h4>1. Planejamento</h4>
@@ -103,10 +127,11 @@
             <h2 data-aos="fade-down">Meus Serviços</h2>
             <p data-aos="fade-down" class="section-subtitle">Soluções completas em vídeo, da concepção à entrega final.</p>
             <div class="grid servicos-grid">
+                 <!-- CORRIGIDO: Atraso em cascata (100, 200, 300) para animação fluida -->
                 <div class="servico-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="servico-icone">🎥</div>
                     <h3>Captação e Filmagem</h3>
-                    <p>Gravação  em 4K com equipamentos de ponta para garantir a máxima qualidade de imagem para seu projeto.</p>
+                    <p>Gravação em 4K com equipamentos de ponta para garantir a máxima qualidade de imagem para seu projeto.</p>
                 </div>
                 <div class="servico-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="servico-icone">✂️</div>
@@ -119,32 +144,32 @@
                     <p>Tratamento de cor cinematográfico para criar a atmosfera desejada e garantir uma estética visual impactante e coesa.</p>
                 </div>
             </div>
-            <!-- <div class="equipamentos" data-aos="fade-up">
-                <h3>Meus Equipamentos</h3>
-                <p></p>
-            </div> -->
         </section>
 
         <section id="portfolio" class="container">
             <h2 data-aos="zoom-in">Portfólio</h2>
             <div class="swiper portfolio-slider" data-aos="zoom-in-up">
                 <div class="swiper-wrapper">
+                    
+                    <!-- CORRIGIDO: Link do YouTube no formato "watch?v=" que o GLightbox entende -->
                     <div class="swiper-slide">
-                        <a href="https://youtu.be/2h50Ns2O4k4?si=4Y6wpIB4JxjJRfNz" class="glightbox" data-gallery="portfolio" title="Clipe em Paranaguá">
+                        <a href="https://www.youtube.com/watch?v=2h50Ns2O4k4" class="glightbox" data-gallery="portfolio" title="Clipe em Paranaguá">
                             <div class="portfolio-card">
-                                <div class="card-video-container"><img src="img/Paranagua.png" alt="Thumbnail do Projeto 1"></div>
+                                <div class="card-video-container"><img src="img/Paranagua.png" alt="Thumbnail do Clipe em Paranaguá"></div>
                                 <div class="card-content">
                                     <h3 class="card-title">Paranaguá</h3>
-                                    <p class="card-description">Clipe em Paranaguá</p>  
+                                    <p class="card-description">Clipe em Paranaguá</p>   
                                     <div class="card-tags"><span class="tag">Clipe</span></div>
                                 </div>
                             </div>
                         </a>
                     </div>
+                    
+                    <!-- CORRIGIDO: Link do YouTube no formato "watch?v=" -->
                     <div class="swiper-slide"> 
-                        <a href="https://youtu.be/5WB-C0qrOTY?si=YROKAnqM945sUe1x" class="glightbox" data-gallery="portfolio" title="Equinox 2025" data-format="vertical">
+                        <a href="https://www.youtube.com/watch?v=5WB-C0qrOTY" class="glightbox" data-gallery="portfolio" title="Equinox 2025" data-format="vertical">
                             <div class="portfolio-card">
-                                <div class="card-video-container"><img src="img/2025-chevrolet-equinox.jpg" alt=""></div>
+                                <div class="card-video-container"><img src="img/2025-chevrolet-equinox.jpg" alt="Thumbnail da Nova Equinox 2025"></div>
                                 <div class="card-content">
                                     <h3 class="card-title">Nova Equinox 2025</h3>
                                     <p class="card-description">Showcase de produto para o setor automotivo: Nova Equinox 2025.</p>
@@ -153,23 +178,26 @@
                             </div>
                         </a>
                     </div>
+                    
+                    <!-- CORRIGIDO: Link do YouTube (removida a parte da playlist) -->
                     <div class="swiper-slide">
-                        <a href="https://www.youtube.com/watch?v=6IPe21598yo&list=PL9Z45tVfL7-FnLkT1INbIfnqrUYp0penb&index=8" class="glightbox" data-gallery="portfolio" title="Aniverário Infantil" data-format="vertical">
+                        <a href="https://www.youtube.com/watch?v=6IPe21598yo" class="glightbox" data-gallery="portfolio" title="Aniversário Infantil" data-format="vertical">
                             <div class="portfolio-card">
-                                <div class="card-video-container"><img src="img/zion_logo.png" alt="Thumbnail do Projeto 3"></div>
+                                <div class="card-video-container"><img src="img/zion_logo.png" alt="Thumbnail de Aniversário Infantil"></div>
                                 <div class="card-content">
                                     <h3 class="card-title">Aniversário</h3>
-
-                                    <p class="card-description"></p>
+                                    <p class="card-description">Registro de festa de aniversário infantil.</p>
                                     <div class="card-tags"><span class="tag">Aniversário</span><span class="tag">Festa</span></div>
                                 </div>
                             </div>
                         </a>
                     </div>
+                    
+                    <!-- CORRIGIDO: Link do YouTube no formato "watch?v=" -->
                     <div class="swiper-slide">
-                        <a href="https://youtu.be/akPeF5lTbwc?si=PTTHDAznLQpo3USC" class="glightbox" data-gallery="portfolio" title="Novo Nivus 2025" data-format="vertical">
+                        <a href="https://www.youtube.com/watch?v=akPeF5lTbwc" class="glightbox" data-gallery="portfolio" title="Novo Nivus 2025" data-format="vertical">
                             <div class="portfolio-card">
-                                <div class="card-video-container"><img src="img/VolkswagenNivus.jpg" alt="Thumbnail do Projeto 3"></div>
+                                <div class="card-video-container"><img src="img/VolkswagenNivus.jpg" alt="Thumbnail do Novo Nivus 2025"></div>
                                 <div class="card-content">
                                     <h3 class="card-title">Novo Nivus 2025</h3>
                                     <p class="card-description">Showcase de produto para o setor automotivo: Novo Nivus 2025.</p>
@@ -178,18 +206,20 @@
                             </div>
                         </a>
                     </div>
+
                     <div class="swiper-slide">
-                        <a href="https://youtu.be/E87GOm-6Mak?si=3XAu7ZbeuxVFAkuP" class="glightbox" data-gallery="portfolio" title="Djordan Burger" data-format="vertical">
+                        <a href="https://www.youtube.com/watch?v=E87GOm-6Mak" class="glightbox" data-gallery="portfolio" title="Djordan Burger" data-format="vertical">
                             <div class="portfolio-card">
-                                <div class="card-video-container"><img src="img/Djordan.png" alt="Thumbnail do Projeto 3"></div>
+                                <div class="card-video-container"><img src="img/Djordan.png" alt="Thumbnail da Djordan Burger"></div>
                                 <div class="card-content">
                                     <h3 class="card-title">Djordan Burger</h3>
                                     <p class="card-description">Vídeo gastronômico: o preparo artesanal na Djordan Burger.</p>
-                                    <div class="card-tags"><span class="tag">Gastronomia</span><span class="tag">Food Reel</span><span class="tag">Social Media</span></div>
+                                    <div class="card-tags"><span class="tag">Gastronomia</span><span class="tag">Food Reel</span></div>
                                 </div>
                             </div>
                         </a>
                     </div>
+
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -198,31 +228,44 @@
 
         <section id="contato" class="container">
             <h2 data-aos="fade-up">Vamos Conversar?</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Seja para um orçamento, uma ideia ou um simples olá, estou aqui para ajudar. Use o formulário ou entre em contato diretamente.</p>
-            <div class="contato-direto" data-aos="fade-up" data-aos-delay="200">
-                <a href="mailto:zionfilms.audiovisual@gmail.com" class="contato-link">
-    <svg class="contato-svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-        <path d="M48 64C21.5 64 0 85.5 0 112v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zM0 112V100c0-13 10-24 23-25c1.4 0 2.8 0 4.2 0H484.8c1.4 0 2.8 0 4.2 0c13 1 23 12 23 25v12c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12zM48 400h416V160H48v240zm0-296h416v24c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12v-24c0-26.5 21.5-48 48-48z"/>
-    </svg>
-    <span>zionfilms.audiovisual@gmail.com</span>
-</a>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        Seja para um orçamento, uma ideia ou um simples olá, estou aqui para ajudar.
+    </p>
 
-                <a href="https://wa.me/554185066974?text=Ol%C3%A1%20Matheus%21%20Vi%20o%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20um%20or%C3%A7amento." class="btn-whatsapp-glow" target="_blank">
-                <img src="img/icons8-whatsapp-30.png" width="24px" height="24px" alt="">
-                <span>Orçamento WhatsApp</span>
-            </a>
+    <!-- 1. BOTÃO PRINCIPAL (WHATSAPP) -->
+    <div class="contato-principal" data-aos="fade-up" data-aos-delay="200">
+        <a href="https://wa.me/554185066974?text=Ol%C3%A1%20ZionFilms%21%20Vi%20o%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20um%20or%C3%A7amento." class="btn-whatsapp-glow" target="_blank">
+            <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224-99.6 224-222 0-59.3-25.2-115-67.1-157zm-157 .5c51 0 97.2 19.4 132.3 53.3 35.1 33.9 56.7 81.3 56.7 132.3 0 107.8-87.5 195.3-195.3 195.3-34.1 0-67.3-8.8-95.3-25.1L48.6 451.3l29.2-86.4c-18.7-29.3-29.9-63.5-29.9-99.9 0-107.8 87.5-195.3 195.3-195.3h.1zm107.2 131.7c-6.9 16.3-19.1 29.5-33.1 41.5-13.9 12-29.7 22.8-46.8 31.8-17.1 9-35.4 15.9-54.3 20.3-19 4.4-38.3 6.3-57.8 5.7-20.1-.7-40-3.3-59.3-7.9-19.2-4.6-37.9-11.1-55.8-19.3-17.9-8.2-34.9-18.1-50.6-29.6-15.7-11.5-29.8-24.8-42.1-39.6-12.3-14.8-22.6-31.1-30.8-48.4-8.2-17.3-14-35.6-17.5-54.5-3.5-18.9-4.7-38.3-3.6-57.8 1.1-19.5 4.5-38.7 10.2-57.4 5.7-18.7 13.6-36.8 23.6-53.9 10-17.1 22.1-33.1 35.9-47.6 13.8-14.6 29.4-27.4 46.5-38.3 17.1-10.9 35.6-20.1 55-27.4 19.4-7.3 39.8-12.8 60.7-16.1 20.9-3.3 42.4-4.5 64.1-3.2 21.7 1.3 42.9 5.2 63.3 11.6 20.4 6.4 40 15.2 58.4 26.2 18.4 11 35.5 24.3 50.8 39.5 15.4 15.2 28.7 32.4 40 51.1 11.3 18.7 20.4 39 27 60.1 6.7 21.1 10.8 43 12.3 65.4 1.5 22.4.3 44.9-3.5 66.8-3.8 21.9-10.3 43.1-19.1 63.3-8.8 20.2-20.2 39.3-33.9 56.7-13.6 17.4-29.6 33-47.5 46.4-17.9 13.4-37.9 24.7-59.2 33.6-21.3 8.9-43.9 15.3-67.2 19-23.3 3.7-47.2 4.8-70.9 3.2z"/>
+            </svg>
+            <span>Orçamento WhatsApp</span>
+        </a>
+    </div>
+
+    <!-- 2. LINKS SECUNDÁRIOS -->
+    <div class="contato-secundario" data-aos="fade-up" data-aos-delay="300">
+        <a href="mailto:zionfilms.audiovisual@gmail.com" class="contato-link">
+            <svg class="contato-svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path d="M48 64C21.5 64 0 85.5 0 112v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zM0 112V100c0-13 10-24 23-25c1.4 0 2.8 0 4.2 0H484.8c1.4 0 2.8 0 4.2 0c13 1 23 12 23 25v12c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12zM48 400h416V160H48v240zm0-296h416v24c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12v-24c0-26.5 21.5-48 48-48z"/>
+            </svg>
+            <span>zionfilms.audiovisual@gmail.com</span>
+        </a>
+        <span class="contato-ou">ou</span>
+        <a href="#form-contato" class="contato-link-form">Preencha o formulário</a>
+    </div>
+    
+    <!-- 3. FORMULÁRIO -->
+    <form id="form-contato" action="https://formspree.io/f/xzzgknrp" method="POST" data-aos="fade-up" data-aos-delay="400">
+        <input type="text" name="nome" placeholder="Seu nome" required>
+        <input type="email" name="email" placeholder="Seu e-mail" required>
+        <textarea name="mensagem" placeholder="Sua mensagem" required></textarea>
+        <button type="submit">Enviar Mensagem</button>
+    </form>
             
-            </div>
-            <form id="form-contato" action="https://formspree.io/f/xzzgknrp" method="POST" data-aos="fade-up" data-aos-delay="300">
-                <input type="text" name="nome" placeholder="Seu nome" required>
-                <input type="email" name="email" placeholder="Seu e-mail" required>
-                <textarea name="mensagem" placeholder="Sua mensagem" required></textarea>
-                <button type="submit">Enviar Mensagem</button>
-            </form>
-            <div class="faq-container" data-aos="fade-up" data-aos-delay="400">
+            <div class="faq-container" data-aos="fade-up" data-aos-delay="500">
                 <h3>Perguntas Frequentes</h3>
                 <div class="faq-item"><details><summary>Qual o prazo de entrega de um vídeo?</summary><p>O prazo varia com a complexidade, mas um vídeo para redes sociais geralmente leva de 2 a 15 dias úteis após a gravação.</p></details></div>
-                <div class="faq-item"><details><summary>Quanto custa os serviços ?</summary><p>Todos os pacotes são personalizados, os valores variam de acordo com oque o cliente deseja</p></details></div>
+                <div class="faq-item"><details><summary>Quanto custa os serviços?</summary><p>Todos os pacotes são personalizados, os valores variam de acordo com oque o cliente deseja</p></details></div>
                 <div class="faq-item"><details><summary>Como funciona o pagamento?</summary><p>Geralmente trabalho com um sinal de 50% para agendamento e os 50% restantes na entrega do material finalizado.</p></details></div>
             </div>
         </section>

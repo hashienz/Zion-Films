@@ -20,6 +20,7 @@ function main() {
     initSmoothScroll();
     initScrollBasedFeatures();
     initAutoHideHeader();
+    initMobileMenu();
 }
 
 /**
@@ -28,10 +29,10 @@ function main() {
  */
 function initAOS() {
     AOS.init({
-        duration: 800,      // Duração da animação em milissegundos
-        easing: 'ease-in-out', // Curva de aceleração da animação
-        once: true,         // A animação acontece apenas uma vez por elemento
-        delay: 100,         // Atraso geral para o início da animação
+        duration: 800, 
+        easing: 'ease-in-out', 
+        once: true,         
+        delay: 100,         
     });
 }
 
@@ -67,18 +68,18 @@ function initGLightbox() {
  */
 function initSwiper() {
     const swiper = new Swiper('.portfolio-slider', {
-        effect: 'coverflow',    // Efeito de transição dos slides
-        grabCursor: true,       // Mostra um ícone de "mão" para indicar que é arrastável
-        centeredSlides: true,   // O slide ativo fica sempre no centro
-        slidesPerView: 'auto',  // A largura do slide é definida pelo CSS, permitindo ver os vizinhos
-        loop: true,             // Navegação infinita (volta para o início após o último slide)
+        effect: 'coverflow',    
+        grabCursor: true,     
+        centeredSlides: true,  
+        slidesPerView: 'auto',  
+        loop: true,            
         
         coverflowEffect: {
-            rotate: 0,          // Rotação dos slides laterais
-            stretch: 0,         // Alongamento dos slides laterais
-            depth: 100,         // Profundidade (efeito 3D)
-            modifier: 2,        // Multiplicador do efeito
-            slideShadows: false,// Desativa as sombras padrão do Swiper
+            rotate: 0,         
+            stretch: 0,         
+            depth: 100,       
+            modifier: 2,        
+            slideShadows: false,
         },
 
         // Habilita as setas de navegação
@@ -90,10 +91,6 @@ function initSwiper() {
 }
 
 
-/**
- * Configura a rolagem suave ao clicar nos links do menu de navegação.
- * Esta função é opcional se o `scroll-behavior: smooth` no CSS for suficiente,
- */
 function initSmoothScroll() {
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
     navLinks.forEach(link => {
@@ -111,12 +108,6 @@ function initSmoothScroll() {
     });
 }
 
-
-/**
- * Inicializa todas as funcionalidades que dependem da posição de rolagem da página.
- * Agrupa a lógica do menu ativo e do botão "Voltar ao Topo" em um único listener
- * para melhor performance.
- */
 function initScrollBasedFeatures() {
     const sections = document.querySelectorAll('main section');
     const navLinks = document.querySelectorAll('nav a');
@@ -142,10 +133,9 @@ function initScrollBasedFeatures() {
 
 
 /**
- * Atualiza qual link do menu está com a classe 'active' com base na posição do scroll.
- * @param {number} scrollY - A posição atual do scroll vertical.
- * @param {NodeList} sections - A lista de elementos de seção.
- * @param {NodeList} navLinks - A lista de links da navegação.
+ * @param {number} scrollY 
+ * @param {NodeList} sections 
+ * @param {NodeList} navLinks 
  */
 function updateActiveNavLink(scrollY, sections, navLinks) {
     let currentSectionId = '';
@@ -169,9 +159,9 @@ function updateActiveNavLink(scrollY, sections, navLinks) {
 
 
 /**
- * Mostra ou esconde o botão "Voltar ao Topo" com base na posição do scroll.
- * @param {number} scrollY - A posição atual do scroll vertical.
- * @param {HTMLElement} backToTopBtn - O elemento do botão.
+
+ * @param {number} scrollY 
+ * @param {HTMLElement} backToTopBtn 
  */
 function toggleBackToTopButton(scrollY, backToTopBtn) {
     if (scrollY > 500) {
@@ -188,24 +178,61 @@ function initAutoHideHeader() {
     let lastScrollTop = 0; 
 
     window.addEventListener('scroll', function() {
-        // Pega a posição atual do scroll vertical
+        
         let currentScroll = window.scrollY || document.documentElement.scrollTop;
 
-        // Condição para só ativar o efeito após rolar um pouco para baixo
         if (currentScroll > 100) { 
             if (currentScroll > lastScrollTop) {
-                // Rolando para BAIXO: esconde o header
                 header.classList.add('header-hidden');
             } else {
-                // Rolando para CIMA: mostra o header
                 header.classList.remove('header-hidden');
             }
         } else {
-            // Se estiver perto do topo, sempre mostra o header
+            
             header.classList.remove('header-hidden');
         }
 
-        // Atualiza a última posição do scroll para a próxima verificação
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     }, false);
+}
+function initMobileMenu() {
+    const menuBtn = document.querySelector('.menu-hamburger');
+    const menuLista = document.querySelector('header nav ul');
+
+    if (!menuBtn || !menuLista) return; 
+
+    
+    function toggleMenu(forceClose = false) {
+        if (forceClose) {
+            menuLista.classList.remove('is-active');
+            menuBtn.classList.remove('is-active');
+        } else { // Senão, alterna as classes
+            menuLista.classList.toggle('is-active');
+            menuBtn.classList.toggle('is-active');
+        }
+    }
+
+   
+    menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        toggleMenu();
+    });
+
+    // Evento para fechar ao clicar em um LINK
+    menuLista.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            toggleMenu(true); 
+        });
+    });
+
+    // Evento para fechar ao clicar FORA do menu
+    document.addEventListener('click', (e) => {
+        if (menuLista.classList.contains('is-active') && !menuLista.contains(e.target)) {
+            toggleMenu(true); 
+        }
+    });
+
+    menuLista.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 }

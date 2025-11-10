@@ -4,82 +4,70 @@
 /* 2. CLASSES UTILITÁRIAS (container, grid, etc.)
 /* 3. CABEÇALHO (HEADER) E NAVEGAÇÃO
 /* 4. SEÇÃO INÍCIO (HERO)
-/* 5. SEÇÃO SERVIÇOS
-/* 6. SEÇÃO PORTFÓLIO (SLIDER)
-/* 7. SEÇÃO CONTATO (FORMULÁRIO E FAQ)
-/* 8. RODAPÉ (FOOTER)
-/* 9. ELEMENTOS INTERATIVOS (Botão Voltar ao Topo, Animações)
-/* 10. MEDIA QUERIES (Estilos para telas menores)
+/* 5. SEÇÃO SOBRE MIM
+/* 6. SEÇÃO SERVIÇOS
+/* 7. SEÇÃO PORTFÓLIO (SLIDER)
+/* 8. SEÇÃO CONTATO (FORMULÁRIO, BOTÕES E FAQ)
+/* 9. ELEMENTOS INTERATIVOS (Botão Voltar ao Topo, GLightbox)
+/* 10. MEDIA QUERIES (Responsividade e Menu Mobile)
 /* =================================================================== */
 
 
 /* --- 1. ESTILOS GERAIS E VARIÁVEIS --- */
 /* ------------------------------------------------------------------- */
-
-/* :root permite criar variáveis CSS para usar em todo o site.
-   Facilita a mudança de cores e fontes em um só lugar. */
 :root {
   --bg-color: #0f0f0f;
   --text-color: #f9f9f9;
   --accent-color: #fbbf24;
-  --accent-color-rgb: 251, 191, 36; /* Versão RGB da cor para usar com transparência */
+  --accent-color-rgb: 251, 191, 36;
   --neutral-color: #1f1f1f;
   --font-main: 'Poppins', sans-serif;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   --neon-green: #39ff14;
 }
 
-/* Reset básico para remover margens e paddings padrão dos navegadores */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Faz com que padding e border não aumentem a largura dos elementos */
+  box-sizing: border-box;
 }
 
-/* Define a rolagem suave para todo o documento ao clicar em links internos */
 html {
   scroll-behavior: smooth;
 }
 
-/* Estilos principais do corpo da página */
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-main);
-  line-height: 1.6; /* Espaçamento entre linhas para melhor legibilidade */
+  line-height: 1.6;
   overflow-x: hidden; /* Impede a rolagem horizontal indesejada */
 }
-body, html {
-    overflow-x: hidden;
-}
+
 
 /* --- 2. CLASSES UTILITÁRIAS --- */
 /* ------------------------------------------------------------------- */
-
-/* Centraliza o conteúdo e define uma largura máxima */
 .container {
   max-width: 1200px;
-  margin: auto; /* Truque para centralizar horizontalmente */
+  margin-left: auto;
+  margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-/* Define o espaçamento vertical padrão para as seções */
 section {
   padding-top: 7rem;
   padding-bottom: 7rem;
-  overflow: hidden;
+  overflow: hidden; /* Garante que conteúdos animados (AOS) não quebrem o layout */
 }
 
-/* Título principal de cada seção */
 h2 {
   text-align: center;
   margin-bottom: 1rem;
-  font-size: clamp(1.8rem, 5vw, 2.2rem); /* Tamanho de fonte responsivo */
+  font-size: clamp(1.8rem, 5vw, 2.2rem);
   color: var(--accent-color);
 }
 
-/* Subtítulo usado em algumas seções para dar mais contexto */
 .section-subtitle {
   text-align: center;
   max-width: 600px;
@@ -87,121 +75,163 @@ h2 {
   color: #ccc;
 }
 
-/* Classe genérica para criar layouts em grade */
 .grid {
   display: grid;
-  gap: 2.5rem; /* Espaço entre os itens da grade */
+  gap: 2.5rem;
 }
 
 
 /* --- 3. CABEÇALHO (HEADER) E NAVEGAÇÃO --- */
 /* ------------------------------------------------------------------- */
-
 header {
-  background-color: var(--neutral-color);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: var(--shadow);
-    
-    /* 1. Define uma altura fixa e elegante para a barra */
-    height: 70px;
-    
-    /* 2. Garante que a logo (que será maior) possa "transbordar" */
-    position: relative;
+  background-color: black;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+  transform: translateY(0);
+  transition: transform 0.4s ease-in-out;
 }
+
 header.header-hidden {
   transform: translateY(-100%);
 }
-header nav {
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Centraliza os links do menu verticalmente */
+
+header nav.container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  height: 70px; 
 }
 
+/* Logo */
+.logo-link {
+  display: inline-block;
+  text-decoration: none;
+  z-index: 10000; /* Garante que a logo fique na frente do menu mobile */
+}
+
+.logo-img {
+  height: 100px;
+  width: auto;
+  vertical-align: middle; 
+}
+
+/* Menu Desktop */
 header nav ul {
-  /* 9. Adiciona uma margem à esquerda do menu para
-       não bater na logo de 100px. Ajuste 130px se precisar. */
-    margin-left: 130px; 
-    
-    /* (Mantenha seus outros estilos de 'ul' aqui) */
-    display: flex;
-    list-style: none;
-    gap: 1.5rem;
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
 }
 
 header nav ul a {
   color: var(--text-color);
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
-    padding: 4px 0;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.3s ease;
 }
 
-/* Efeito de sublinhado que aparece ao passar o mouse */
 header nav ul a::after {
   content: '';
-    position: absolute;
-    left: 0;
-    bottom: -5px; /* Posição da barra */
-    width: 100%;
-    height: 2px;
-    background-color: var(--accent-color);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
+  position: absolute;
+  left: 0;
+  bottom: -5px; 
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
 }
 
-header nav ul a:hover::after {
-    transform: scaleX(1);
+header nav ul a:hover::after,
+header nav ul a:focus::after {
+  transform: scaleX(1);
 }
 
-/* Classe adicionada via JS para destacar o link da seção atual */
-header nav a.active {
+header nav ul a.active {
   color: var(--accent-color);
 }
 
-/* --- ESTILOS DA LOGO NO CABEÇALHO --- */
-.logo-link {
- /* 4. Tira a logo do fluxo normal da página */
-    position: absolute;
-    
-    /* 5. Posiciona a logo: 50% para baixo a partir do topo */
-    top: 50%;
-    
-    /* 6. Puxa a logo 50% para cima (baseado no seu próprio tamanho)
-       Resultado: A logo fica perfeitamente centrada na barra de 70px */
-    transform: translateY(-50%);
-    
-    /* 7. Necessário para a animação da barra */
-    display: inline-block;
-    text-decoration: none; 
-}
-.logo-img {
-    height: 100px; 
-    width: auto;
-}
-/* .logo-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: var(--accent-color);
-    bottom: -10px; 
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.3s ease-in-out;
-} */
-
-.logo-link:hover::after {
-    transform: scaleX(1);
+/* Esconde os "frufrus" (rodapé do menu) no desktop */
+.menu-drawer-footer {
+  display: none;
 }
 
-/* --- ESTILOS DA SEÇÃO SOBRE MIM --- */
 
-/* Layout principal com 2 colunas: foto e texto */
+/* --- 4. SEÇÃO INÍCIO (HERO) --- */
+/* ------------------------------------------------------------------- */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.video-destaque {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: blur(8px) brightness(0.5);
+  transform: scale(1.1); 
+}
+
+.hero-text {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  max-width: 800px;
+}
+
+/* Logos de clientes na Hero */
+.client-logos {
+  margin-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1.5rem;
+}
+
+.logos-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #ccc;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.logo-images img {
+  height: 35px;
+  width: auto;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  /* Filtro para deixar logos brancas (se forem coloridas) */
+  filter: brightness(0) invert(1) grayscale(1);
+}
+
+.logo-images img:hover {
+  opacity: 1;
+}
+
+
+/* --- 5. SEÇÃO SOBRE MIM --- */
+/* ------------------------------------------------------------------- */
 .sobre-mim-layout {
   display: grid;
   grid-template-columns: 1fr 2fr; 
@@ -209,15 +239,13 @@ header nav a.active {
   gap: 3rem; 
 }
 
-/* Estilo da imagem */
 .sobre-mim-foto img {
   width: 100%;
   height: auto;
-  border-radius: 16px; /* Bordas arredondadas */
+  border-radius: 16px; 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Estilo do bloco de texto */
 .sobre-mim-texto h3 {
   font-size: 1.8rem;
   color: var(--accent-color);
@@ -230,7 +258,6 @@ header nav a.active {
   line-height: 1.7;
 }
 
-/* Estilo do botão de "Call to Action" */
 .cta-button {
   display: inline-block;
   background-color: var(--accent-color);
@@ -247,10 +274,9 @@ header nav a.active {
   transform: scale(1.05);
 }
 
-/* --- ESTILOS DA SUBSEÇÃO "MEU PROCESSO" --- */
-
+/* Subseção "Processo de Trabalho" */
 .processo-container {
-  margin-top: 6rem; /* Espaço acima da subseção */
+  margin-top: 6rem;
 }
 
 .subtitulo-secao {
@@ -262,7 +288,7 @@ header nav a.active {
 
 .processo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 4 colunas que se adaptam */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
 }
 
@@ -284,149 +310,13 @@ header nav a.active {
   margin-bottom: 0.5rem;
 }
 
-/* Ajustes para telas menores */
-@media (max-width: 768px) {
-  .sobre-mim-layout {
-    grid-template-columns: 1fr; /* Em telas pequenas, a foto fica em cima do texto */
-    text-align: center;
-  }
-}
 
-/* --- 4. SEÇÃO INÍCIO (HERO) --- */
+/* --- 6. SEÇÃO SERVIÇOS --- */
 /* ------------------------------------------------------------------- */
-
-.hero {
-  min-height: 100vh; /* Faz a seção ocupar a altura total da tela */
-  position: relative;
-  display: flex; /* Usado para centralizar o texto verticalmente e horizontalmente */
-  align-items: center;
-  justify-content: center;
-  padding: 0; /* Remove o padding padrão da seção */
-  overflow: hidden;
-}
-
-/* Vídeo de fundo */
-.video-destaque {
-  position: absolute; /* Posiciona o vídeo em relação à seção .hero */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Garante que o vídeo cubra toda a área sem distorcer */
-  filter: brightness(0.5); /* Escurece o vídeo para o texto ficar legível */
-  z-index: -1; /* Coloca o vídeo atrás do texto */
-  filter: blur(8px) brightness(0.5);
-  transform: scale(1.1);
-}
-
-/* Caixa de texto sobre o vídeo */
-.hero-text {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 2rem 3rem;
-  border-radius: 12px;
-  backdrop-filter: blur(5px); /* Efeito de vidro fosco */
-  max-width: 800px;
-}
-
-/* Garante que o link não tenha sublinhado e o card não mude de cor */
-.swiper-slide a {
-    text-decoration: none;
-    color: inherit;
-    display: block; /* Importante para o hover funcionar bem */
-}
-
-/* Adiciona um ícone de "play" sobre a thumbnail */
-.card-video-container::after {
-    content: '▶'; /* Símbolo de play */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    font-size: 2rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 5px;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    cursor: pointer;
-}
-
-/* Efeito de hover no ícone de play */
-.swiper-slide a:hover .card-video-container::after {
-    transform: translate(-50%, -50%) scale(1.1);
-    background-color: rgba(var(--accent-color-rgb), 0.8);
-}
-
-/* Estilo para a imagem da thumbnail */
-.card-video-container img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
-}
-
-
-/* Container geral para a seção de logos */
-.client-logos {
-    margin-top: 3rem; /* Espaço acima da seção de logos */
-    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Linha divisória sutil */
-    padding-top: 1.5rem;
-}
-
-/* Título "Trabalhos realizados para:" */
-.logos-title {
-    font-size: 0.8rem;
-    text-transform: uppercase; /* Deixa o texto em maiúsculas */
-    letter-spacing: 1.5px; /* Espaçamento entre as letras */
-    color: #ccc;
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-/* Container que alinha as imagens das logos */
-.logo-images {
-    display: flex;
-    justify-content: center; /* Centraliza os logos horizontalmente */
-    align-items: center; /* Alinha verticalmente */
-    gap: 3rem; /* Espaço entre os logos */
-    flex-wrap: wrap; /* Permite que os logos quebrem a linha em telas menores */
-}
-
-/* Estilo para cada imagem de logo */
-.logo-images img {
-    height: 35px; /* Define uma altura fixa para todos os logos ficarem uniformes */
-    width: auto;  /* A largura se ajusta para manter a proporção */
-    opacity: 0.7; /* Deixa o logo um pouco sutil */
-    transition: opacity 0.3s ease;
-}
-
-.logo-images img:hover {
-    opacity: 1; /* O logo fica totalmente visível ao passar o mouse */
-}
-.logo-images img {
-    filter: brightness(0) invert(1) grayscale(1);
-    opacity: 0.7;
-}
-
-.logo-images img:hover {
-    opacity: 1;
-}
-
-/* --- 5. SEÇÃO SERVIÇOS --- */
-/* ------------------------------------------------------------------- */
-
 .servicos-grid {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Grid responsivo */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
-/* Estilo principal do card de serviço */
 .servico-card {
   background-color: var(--neutral-color);
   padding: 2.5rem 2rem;
@@ -437,13 +327,8 @@ header nav a.active {
 }
 
 .servico-card:hover {
-  transform: translateY(-8px); /* Efeito de "flutuar" */
+  transform: translateY(-8px);
   border-color: var(--accent-color);
-}
-
-.servico-icone {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
 }
 
 .servico-card h3 {
@@ -451,7 +336,6 @@ header nav a.active {
   font-size: 1.3rem;
 }
 
-/* Caixa de destaque para a lista de equipamentos */
 .equipamentos {
   text-align: center;
   margin-top: 5rem;
@@ -461,41 +345,59 @@ header nav a.active {
 }
 
 
-/* --- 6. SEÇÃO PORTFÓLIO (SLIDER) --- */
+/* --- 7. SEÇÃO PORTFÓLIO (SLIDER) --- */
 /* ------------------------------------------------------------------- */
-
 .portfolio-slider {
   width: 100%;
   padding-top: 50px;
   padding-bottom: 50px;
 }
 
+/* Link que envolve o card (para GLightbox) */
+.swiper-slide a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* Estilo do slide (largura) */
 .swiper-slide {
-  width: 60%; /* Define a largura para que os slides vizinhos fiquem visíveis */
+  width: 60%;
   transition: all 0.5s ease;
 }
 
-/* Estilo para os cards que NÃO estão no centro */
+/* Slide vertical (largura e proporção) */
+.swiper-slide.slide-vertical {
+  width: 35%;
+  max-width: 380px;
+}
+
+.slide-vertical .card-video-container {
+  padding-top: 177.77%; /* Proporção 9:16 */
+}
+
+/* Animação dos slides inativos */
 .swiper-slide .portfolio-card {
   transform: scale(0.8);
   filter: blur(4px);
   opacity: 0.5;
+  transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
 }
 
-/* Estilo para o card que está ATIVO no centro */
+/* Animação do slide ativo (centro) */
 .swiper-slide-active .portfolio-card {
   transform: scale(1);
   filter: blur(0px);
   opacity: 1;
 }
 
-/* Estilos das setas de navegação do Swiper */
+/* Setas de navegação do Swiper */
 .swiper-button-next,
 .swiper-button-prev {
   color: var(--accent-color);
 }
 
-/* Estilos dos cards de portfólio (a estrutura interna) */
+/* Estrutura do Card */
 .portfolio-card {
   background-color: var(--neutral-color);
   border-radius: 16px;
@@ -507,18 +409,48 @@ header nav a.active {
 
 .card-video-container {
   position: relative;
-  padding-top: 56.25%; /* Truque para manter a proporção de vídeo 16:9 */
+  padding-top: 56.25%; /* Proporção 16:9 */
   height: 0;
+  overflow: hidden; /* Garante que o ícone de play não vaze */
 }
 
-.card-video-container iframe {
+/* Ícone de "Play" sobre a thumbnail */
+.card-video-container::after {
+  content: '▶';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 5px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.swiper-slide a:hover .card-video-container::after {
+  transform: translate(-50%, -50%) scale(1.1);
+  background-color: rgba(var(--accent-color-rgb), 0.8);
+}
+
+/* Imagem de thumbnail */
+.card-video-container img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
+/* Conteúdo de texto do card */
 .card-content {
   padding: 1.5rem;
 }
@@ -538,83 +470,149 @@ header nav a.active {
   font-size: 0.8rem;
   font-weight: 500;
 }
-/* --- CUSTOMIZAÇÃO VISUAL DA GALERIA (GLIGHTBOX) --- */
 
-/* Fundo da descrição e do título */
-.gslide-description {
-    background-color: var(--neutral-color) !important; /* Usamos a cor de fundo dos seus cards */
-}
 
-/* Cor do título dentro da descrição */
-.gslide-description .gslide-title {
-    color: var(--accent-color); /* Usamos sua cor de destaque */
-    margin-bottom: 0.5rem;
-}
-
-/* Cor do texto da descrição (se você adicionar uma) */
-.gslide-description .gslide-desc {
-    color: var(--text-color);
-}
-
-/* Cor e estilo das setas de navegação da galeria */
-.gnext,
-.gprev {
-    background-color: rgba(0, 0, 0, 0.4) !important;
-}
-
-.gnext svg,
-.gprev svg {
-    color: var(--accent-color) !important; /* Setas com sua cor de destaque */
-    transition: transform 0.3s ease;
-}
-
-.gnext:hover svg,
-.gprev:hover svg {
-    transform: scale(1.2); /* Efeito de zoom ao passar o mouse */
-}
-.g-modal.vertical-mode .gslide-media {
-    max-width: 450px;
-    margin: auto;
-}
-.g-modal.vertical-mode .gslide-video {
-    padding-bottom: 177.77%;
-}
-
-/* --- 7. SEÇÃO CONTATO (FORMULÁRIO E FAQ) --- */
+/* --- 8. SEÇÃO CONTATO (FORMULÁRIO, BOTÕES E FAQ) --- */
 /* ------------------------------------------------------------------- */
 
-/* Links de contato direto (email, whatsapp) */
-.contato-direto {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
+section#contato {
+  display: block; /* Garante que não seja flex ou grid */
 }
 
-.contato-link {
-  display: flex;
+/* Botão Principal (WhatsApp) */
+.contato-principal {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.btn-whatsapp-glow {
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  background-color: var(--neutral-color);
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
+  justify-content: center;
+  gap: 12px;
+  background-color: var(--neon-green);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 50px;
+  border: none;
+  font-family: var(--font-main);
+  font-weight: 700;
   text-decoration: none;
-  color: var(--text-color);
-  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
+  /* Brilho Sutil */
+  box-shadow: 0 0 12px 2px rgba(57, 255, 20, 0.4);
+  
+  transition: all 0.3s ease-in-out;
+  animation: pulse-glow 2s infinite alternate;
+}
+
+.btn-whatsapp-glow .whatsapp-icon {
+  width: 22px;
+  height: 22px;
+  fill: #fff;
+}
+
+/* Efeito hover (também sutil) */
+.btn-whatsapp-glow:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px 4px rgba(57, 255, 20, 0.5);
+}
+
+/* Animação de pulsação sutil */
+@keyframes pulse-glow {
+  from {
+    box-shadow: 0 0 12px 2px rgba(57, 255, 20, 0.4);
+  }
+  to {
+    box-shadow: 0 0 18px 4px rgba(57, 255, 20, 0.5);
+  }
+}
+
+/* Botões Secundários (Email, Formulário) */
+.contato-secundario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; 
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+/* Botão de E-mail (Ghost Button) */
+.contato-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contato-link .contato-svg-icon {
+  width: 20px;
+  height: 20px;
+  fill: var(--accent-color);
+  transition: fill 0.3s ease;
 }
 
 .contato-link:hover {
-  background-color: #333;
+  background-color: var(--accent-color);
+  color: #000;
 }
 
-/* Formulário de contato */
-form {
+.contato-link:hover .contato-svg-icon {
+  fill: #000;
+}
+
+/* Texto "ou" */
+.contato-ou {
+  color: #888;
+  font-weight: 500;
+}
+
+/* Link "Preencha o formulário" */
+.contato-link-form {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+}
+
+.contato-link-form::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.contato-link-form:hover::after {
+  transform: scaleX(1);
+}
+
+/* Formulário de Contato */
+#form-contato {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  clear: both;
 }
 
 /* FAQ (Perguntas Frequentes) */
@@ -623,7 +621,6 @@ form {
   margin: 4rem auto 0;
 }
 
-/* Estilo do acordeão de perguntas */
 .faq-item details {
   background: var(--neutral-color);
   margin-bottom: 1rem;
@@ -636,10 +633,9 @@ form {
   font-weight: 600;
   cursor: pointer;
   position: relative;
-  list-style: none; /* Remove o marcador de seta padrão */
+  list-style: none;
 }
 
-/* Cria uma seta personalizada para o acordeão */
 .faq-item summary::after {
   content: '▼';
   position: absolute;
@@ -648,12 +644,10 @@ form {
   transition: transform 0.3s ease;
 }
 
-/* Gira a seta quando o acordeão está aberto */
 .faq-item details[open] summary::after {
   transform: rotate(180deg);
 }
 
-/* Estilo do texto da resposta */
 .faq-item p {
   padding: 0 1.2rem 1.2rem;
   color: #ccc;
@@ -664,7 +658,6 @@ form {
 
 /* --- 8. RODAPÉ (FOOTER) --- */
 /* ------------------------------------------------------------------- */
-
 footer {
   text-align: center;
   padding-top: 2rem;
@@ -674,116 +667,10 @@ footer {
   font-size: 0.9rem;
   color: #aaa;
 }
-.btn-whatsapp-glow {
-  /* Layout para alinhar o ícone e o texto */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px; /* Espaço entre o ícone e o texto */
 
-  /* Visual */
-  background-color: var(--neon-green);
-  color: #fff; /* Cor do texto (branco) */
-  padding: 14px 28px; /* Espaçamento interno (altura e largura) */
-  border-radius: 50px; /* Deixa as bordas totalmente redondas */
-  border: none;
-  
-  /* Tipografia */
-  font-family: var(--font-main); /* Usa a fonte 'Poppins' do seu site */
-  font-weight: 700; /* Negrito */
-  text-decoration: none; /* Remove sublinhado do link */
-  text-transform: uppercase; /* ORÇAMENTO WHATSAPP */
-  letter-spacing: 1px;
-  
-  /* EFEITO DE BRILHO (GLOW) */
-  box-shadow: 0 0 12px 2px rgba(75, 141, 64, 0.4);
-  
-  /* Animações */
-  transition: all 0.3s ease-in-out;
-}
-
-/* 3. Estilo do ícone SVG */
-.btn-whatsapp-glow .whatsapp-icon {
-  width: 22px;
-  height: 22px;
-  fill: #fff; /* Cor do ícone (branco) */
-}
-
-/* 4. Efeito ao passar o mouse (hover) */
-.btn-whatsapp-glow:hover {
-  /* Aumenta um pouco o botão */
-  transform: scale(1.05);
-  
-  /* Intensifica o brilho */
-  box-shadow: 0 0 35px 8px rgba(57, 255, 20, 0.8);
-}
-.btn-whatsapp-glow {
-    /* ... (todos os estilos que você já colocou) ... */
-    animation: pulse-glow 2s infinite alternate;
-}
-
-.contato-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 24px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    
-    /* A MÁGICA DO GHOST BUTTON */
-    background: transparent; /* Fundo transparente */
-    border: 2px solid var(--accent-color); /* Borda com sua cor de destaque */
-    color: var(--accent-color); /* Texto com sua cor de destaque */
-    
-    /* Transição suave para o efeito hover */
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* O ícone SVG dentro do botão */
-.contato-link .contato-svg-icon {
-    width: 20px;
-    height: 20px;
-    fill: var(--accent-color); /* Cor do ícone */
-    transition: fill 0.3s ease; /* Transição suave para o hover */
-}
-
-/* EFEITO AO PASSAR O MOUSE */
-.contato-link:hover {
-    background-color: var(--accent-color); /* Preenche o fundo */
-    color: #000; /* Texto fica preto (para contraste) */
-}
-
-.contato-link:hover .contato-svg-icon {
-    fill: #000; /* Ícone também fica preto */
-}
-
-
-
-/* Definição da animação*/
-@keyframes pulse-glow {
-  from {
-    box-shadow: 0 0 12px 2px rgba(57, 255, 20, 0.4);  
-  }
-
-  to {
-    box-shadow: 0 0 18px 4px rgba(57, 255, 20, 0.5); 
-  }
-}
 
 /* --- 9. ELEMENTOS INTERATIVOS --- */
 /* ------------------------------------------------------------------- */
-
-/* Animação de entrada para as seções */
-/* .hidden {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.visible {
-  opacity: 1;
-  transform: translateY(0);
-} */
 
 /* Botão de Voltar ao Topo */
 #back-to-top {
@@ -799,51 +686,288 @@ footer {
   font-size: 1.5rem;
   cursor: pointer;
   z-index: 1000;
-  opacity: 0; /* Começa invisível */
+  opacity: 0;
   transform: scale(0.8);
-  pointer-events: none; /* Não pode ser clicado quando invisível */
+  pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Classe adicionada via JS para mostrar o botão */
 #back-to-top.show {
   opacity: 1;
   transform: scale(1);
   pointer-events: auto;
 }
 
+/* Estilos da Galeria GLightbox (Tema Escuro) */
+.gslide-description {
+  background-color: var(--neutral-color) !important;
+}
+.gslide-description .gslide-title {
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+.gslide-description .gslide-desc {
+  color: var(--text-color);
+}
+.gnext,
+.gprev {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+.gnext svg,
+.gprev svg {
+  color: var(--accent-color) !important;
+  transition: transform 0.3s ease;
+}
+.gnext:hover svg,
+.gprev:hover svg {
+  transform: scale(1.2);
+}
 
-/* --- 10. MEDIA QUERIES (Responsividade) --- */
-/* ------------------------------------------------------------------- */
+/* GLightbox para Vídeos VerticaIS (Desktop) */
+.g-modal.vertical-mode .gslide-media {
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.g-modal.vertical-mode .gslide-video {
+  padding-bottom: 177.77% !important;
+}
 
-/* Estilos para telas com largura máxima de 768px (tablets e celulares) */
+
+/* =================================================================== */
+/* 10. ESTILOS DO MENU MOBILE (VERSÃO GAVETA LATERAL) */
+/* =================================================================== */
+
+/* Botão Hambúrguer (Escondido no Desktop) */
+.menu-hamburger {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10000; 
+  display: none; 
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  width: 28px;
+  height: 21px;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-hamburger .linha {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background-color: var(--text-color);
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animação do "X" */
+.menu-hamburger.is-active {
+  position: fixed;
+  right: 1.5rem;
+  top: 25px;
+}
+
+.menu-hamburger.is-active .linha:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.menu-hamburger.is-active .linha:nth-child(2) {
+  opacity: 0;
+}
+.menu-hamburger.is-active .linha:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* =================================================================== */
+/* 11. MEDIA QUERY (REGRAS SÓ PARA TELAS PEQUENAS) */
+/* =================================================================== */
 @media (max-width: 768px) {
+  
+  /* 1. Mostra o botão hambúrguer */
+  .menu-hamburger {
+    display: flex;
+  }
 
+  /* 2. Esconde o menu desktop e define a GAVETA */
   header nav ul {
-   display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    
+    /* Posição e Tamanho */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70vw;
+    max-width: 300px;
+    height: 100vh;
+    background-color: rgba(31, 31, 31, 0.75); 
+    backdrop-filter: blur(15px); 
+    border-left: 1px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: -5px 0 20px rgba(0,0,0,0.5);
+    padding: 6rem 2rem 2rem;
+    z-index: 9998;
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+  }
+
+  
+  header nav ul.is-active {
+    transform: translateX(0);
+  }
+
+  header nav ul a {
+    font-size: 1.3rem; 
+    color: var(--text-color);
+    transition: color 0.3s ease;
+    position: static; 
+    padding: 0;
   }
   
-  /* Ajusta a largura do slide do portfólio para ocupar mais a tela */
+  /* Remove o efeito de sublinhado no mobile */
+  header nav ul a::after {
+    display: none;
+  }
+
+  /* 5. Destaque do link */
+  header nav ul a:hover,
+  header nav ul a.active {
+    color: var(--accent-color);
+  }
+   
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  
+  .menu-drawer-footer {
+    display: block; 
+    width: 80%;
+    margin-top: auto; 
+    padding-bottom: 2rem;
+    text-align: center;
+  }
+
+  .menu-divider {
+    border: none;
+    height: 1px;
+    background-color: var(--neutral-color); 
+    margin: 0 auto 1.5rem auto;
+    width: 100%;
+  }
+
+  .social-icons-menu {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .social-icons-menu a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .social-icons-menu a:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+  }
+
+  .social-icons-menu a svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
+  .copyright-menu {
+    font-size: 0.8rem;
+    color: #888;
+  }
+
+  /* --- Outras regras responsivas (não relacionadas ao menu) --- */
+  
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  .sobre-mim-layout {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
   .swiper-slide {
     width: 80%;
   }
 
-  /* Faz com que os cards de serviço ocupem uma coluna só */
+  .swiper-slide.slide-vertical {
+    width: 60%;
+  }
+
   .servicos-grid {
     grid-template-columns: 1fr;
   }
-    .g-modal.vertical-mode .gslide-media {
-        height: 80vh;
-        max-width: none;
-    } 
-    .g-modal.vertical-mode .gslide-media video {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
+  
+  .g-modal.vertical-mode .gslide-media {
+    height: 80vh;
+    max-width: none;
+    width: 90vw;
+  } 
+  .g-modal.vertical-mode .gslide-video {
+    padding-bottom: 0 !important;
+    height: 100%;
+  }
 
-    .g-modal.vertical-mode .gslide-video {
-        padding-bottom: 0 !important;
-        height: 100%;
-    }
+  /* --- ESTILOS DO RODAPÉ DO MENU GAVETA --- */
+
+.menu-drawer-footer {
+    width: 80%; /* Ocupa 80% da largura da gaveta */
+    margin-top: auto; /* ESTA É A MÁGICA: empurra o rodapé para baixo */
+    padding-bottom: 2rem; /* Espaço na parte inferior */
+    text-align: center;
+}
+
+.menu-divider {
+    border: none;
+    height: 1px;
+    /* Cor sutil da linha, baseada no seu fundo */
+    background-color: var(--neutral-color); 
+    margin: 0 auto 1.5rem auto;
+    width: 100%;
+}
+
+.social-icons-menu {
+    display: flex;
+    justify-content: center;
+    gap: 2rem; /* Espaço entre os ícones */
+    margin-bottom: 1.5rem;
+}
+
+.social-icons-menu a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons-menu a:hover {
+    color: var(--accent-color); /* Destaque amarelo */
+    transform: scale(1.1);
+}
+
+/* Estilo para os ícones SVG */
+.social-icons-menu a svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.copyright-menu {
+    font-size: 0.8rem;
+    color: #888; /* Cor cinza sutil */
+}
+
 }
