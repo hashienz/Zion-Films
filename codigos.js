@@ -4,15 +4,10 @@
  * @version 2.0.0
  */
 
-// Adiciona um listener que espera todo o conteúdo HTML da página ser carregado antes de executar o JavaScript.
-// Isso evita erros de scripts tentando manipular elementos que ainda não existem.
 document.addEventListener('DOMContentLoaded', () => {
     main();
 });
 
-/**
- * Função principal que orquestra a inicialização de todas as funcionalidades do site.
- */
 function main() {
     initAOS();
     initGLightbox();
@@ -21,12 +16,12 @@ function main() {
     initScrollBasedFeatures();
     initAutoHideHeader();
     initMobileMenu();
+    initServicosInteractiveCards();
+    initServicosObserver();
+    initServicosCTA();
 }
 
-/**
- * Inicializa a biblioteca AOS para as animações de entrada.
- * Este sistema substitui o IntersectionObserver manual.
- */
+
 function initAOS() {
     AOS.init({
         duration: 800, 
@@ -37,9 +32,6 @@ function initAOS() {
 }
 
 
-/**
- * Inicializa a biblioteca GLightbox para criar a galeria de vídeos em tela cheia.
- */
 function initGLightbox() {
     const lightbox = GLightbox({
         loop: true,
@@ -234,5 +226,75 @@ function initMobileMenu() {
 
     menuLista.addEventListener('click', (e) => {
         e.stopPropagation();
+    });
+}
+
+    function initServicosInteractiveCards() {   
+    const cards = document.querySelectorAll('.servico-card');
+
+    // Desativa em dispositivos touch (performance + UX)
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        return;
+    }
+
+    cards.forEach(card => {
+        const bg = card.querySelector('.servico-bg');
+        const icon = card.querySelector('.servico-icon-bg');
+
+        if (!bg || !icon) return;
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const moveX = (x / rect.width - 0.5) * 20;
+            const moveY = (y / rect.height - 0.5) * 20;
+
+            bg.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            icon.style.transform = `
+                translate(-50%, -50%)
+                translate(${moveX * 0.6}px, ${moveY * 0.6}px)
+            `;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            bg.style.transform = '';
+            icon.style.transform = 'translate(-50%, -50%)';
+        });
+    });
+}
+
+function initServicosObserver() {
+    const cards = document.querySelectorAll('.servico-card');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.4 });
+
+    cards.forEach(card => observer.observe(card));
+}
+function initServicosCTA() {
+    const ctas = document.querySelectorAll('.servico-cta[data-scroll]');
+
+    ctas.forEach(cta => {
+        cta.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const target = cta.getAttribute('data-scroll');
+            const section = document.querySelector(target);
+
+            if (!section) return;
+
+            section.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
     });
 }

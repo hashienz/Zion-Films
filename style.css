@@ -313,36 +313,141 @@ header nav ul a.active {
 
 /* --- 6. SEÇÃO SERVIÇOS --- */
 /* ------------------------------------------------------------------- */
+
 .servicos-grid {
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
 }
 
+/* CARD BASE */
 .servico-card {
-  background-color: var(--neutral-color);
-  padding: 2.5rem 2rem;
-  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #1a1a1a, #141414);
+  padding: 3rem 2.5rem;
+  border-radius: 20px;
   text-align: center;
-  border: 1px solid transparent;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
+/* ELEVAÇÃO NO HOVER */
 .servico-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--accent-color);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* FUNDO ANIMADO */
+.servico-bg {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle at top left,
+    rgba(245, 179, 1, 0.18),
+    transparent 60%
+  );
+  animation: bgMove 8s linear infinite;
+  z-index: 0;
+}
+
+@keyframes bgMove {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(20%, 20%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ÍCONE GIGANTE */
+.servico-icon-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 8rem;
+  opacity: 0.06;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: transform 0.6s ease;
+  z-index: 1;
+}
+
+.servico-card:hover .servico-icon-bg {
+  transform: translate(-50%, -50%) rotate(-6deg) scale(1.05);
+}
+
+/* CONTEÚDO */
+.servico-content {
+  position: relative;
+  z-index: 2;
 }
 
 .servico-card h3 {
+  font-size: 1.4rem;
   margin-bottom: 1rem;
-  font-size: 1.3rem;
 }
 
-.equipamentos {
-  text-align: center;
-  margin-top: 5rem;
-  padding: 2rem;
-  background-color: var(--neutral-color);
-  border-radius: 16px;
+.servico-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ccc;
 }
+
+/* LISTA (TERCEIRO CARD) */
+.servico-lista {
+  line-height: 1.7;
+}
+
+/* CTA ESCONDIDO */
+.servico-cta {
+  display: inline-block;
+  margin-top: 1.8rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.servico-card:hover .servico-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* CARD DESTAQUE */
+.servico-card.destaque {
+  border: 1px solid rgba(245, 179, 1, 0.4);
+  box-shadow: 0 0 25px rgba(245, 179, 1, 0.12);
+}
+
+/* DIFERENCIAÇÃO SUAVE POR SERVIÇO */
+.servico-captacao .servico-bg {
+  background: radial-gradient(
+    circle at top left,
+    rgba(0, 180, 255, 0.18),
+    transparent 60%
+  );
+}
+
+.servico-edicao .servico-bg {
+  background: radial-gradient(
+    circle at top left,
+    rgba(245, 179, 1, 0.2),
+    transparent 60%
+  );
+}
+
+.servico-color .servico-bg {
+  background: radial-gradient(
+    circle at top left,
+    rgba(180, 80, 255, 0.2),
+    transparent 60%
+  );
+  
+  .servico-card.is-visible {
+  box-shadow: 0 0 30px rgba(245, 179, 1, 0.15);
+}
+}
+
 
 
 /* --- 7. SEÇÃO PORTFÓLIO (SLIDER) --- */
@@ -476,92 +581,108 @@ header nav ul a.active {
 /* ------------------------------------------------------------------- */
 
 section#contato {
-  display: block; /* Garante que não seja flex ou grid */
+  display: block;
 }
 
-/* Botão Principal (WhatsApp) */
+/* ===============================
+   BOTÃO PRINCIPAL (WHATSAPP)
+================================ */
+
 .contato-principal {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
 }
 
 .btn-whatsapp-glow {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
+
   background-color: var(--neon-green);
   color: #fff;
+
   padding: 14px 28px;
   border-radius: 50px;
   border: none;
+
   font-family: var(--font-main);
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
-  
-  /* Brilho Sutil */
-  box-shadow: 0 0 12px 2px rgba(57, 255, 20, 0.4);
-  
-  transition: all 0.3s ease-in-out;
-  animation: pulse-glow 2s infinite alternate;
+
+  /* Glow sutil */
+  box-shadow: 0 0 6px rgba(57, 255, 20, 0.35);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: pulse-glow-soft 3.5s infinite alternate;
 }
 
-.btn-whatsapp-glow .whatsapp-icon {
+.whatsapp-icon {
   width: 22px;
   height: 22px;
   fill: #fff;
 }
 
-/* Efeito hover (também sutil) */
+/* Hover */
 .btn-whatsapp-glow:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 18px 4px rgba(57, 255, 20, 0.5);
+  transform: scale(1.04);
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.45);
 }
 
-/* Animação de pulsação sutil */
-@keyframes pulse-glow {
+/* Animação de pulsação SUAVE */
+@keyframes pulse-glow-soft {
   from {
-    box-shadow: 0 0 12px 2px rgba(57, 255, 20, 0.4);
+    box-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
   }
   to {
-    box-shadow: 0 0 18px 4px rgba(57, 255, 20, 0.5);
+    box-shadow: 0 0 9px rgba(57, 255, 20, 0.45);
   }
 }
 
-/* Botões Secundários (Email, Formulário) */
+/* ===============================
+   LINKS SECUNDÁRIOS
+================================ */
+
 .contato-secundario {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   gap: 1.5rem;
   width: 100%;
   margin-bottom: 3rem;
 }
 
-/* Botão de E-mail (Ghost Button) */
+/* Botão Email (Ghost Button) */
 .contato-link {
   display: inline-flex;
   align-items: center;
   gap: 12px;
+
   padding: 14px 24px;
   border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
+
   background: transparent;
   border: 2px solid var(--accent-color);
   color: var(--accent-color);
+
+  text-decoration: none;
+  font-weight: 600;
+
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.contato-link .contato-svg-icon {
+.contato-svg-icon {
   width: 20px;
   height: 20px;
-  fill: var(--accent-color);
-  transition: fill 0.3s ease;
+  fill: #ffffff; 
+  transition: opacity 0.2s ease;
+}
+
+.contato-link:hover .contato-svg-icon {
+  opacity: 0.8;
 }
 
 .contato-link:hover {
@@ -569,9 +690,6 @@ section#contato {
   color: #000;
 }
 
-.contato-link:hover .contato-svg-icon {
-  fill: #000;
-}
 
 /* Texto "ou" */
 .contato-ou {
@@ -579,7 +697,7 @@ section#contato {
   font-weight: 500;
 }
 
-/* Link "Preencha o formulário" */
+/* Link formulário */
 .contato-link-form {
   color: var(--accent-color);
   text-decoration: none;
@@ -590,12 +708,13 @@ section#contato {
 .contato-link-form::after {
   content: '';
   position: absolute;
-  bottom: -4px;
   left: 0;
+  bottom: -4px;
   width: 100%;
   height: 2px;
   background-color: var(--accent-color);
   transform: scaleX(0);
+  transform-origin: left;
   transition: transform 0.3s ease;
 }
 
@@ -603,19 +722,23 @@ section#contato {
   transform: scaleX(1);
 }
 
-/* Formulário de Contato */
+/* ===============================
+   FORMULÁRIO
+================================ */
+
 #form-contato {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   max-width: 600px;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  clear: both;
+  margin: 0 auto;
 }
 
-/* FAQ (Perguntas Frequentes) */
+/* ===============================
+   FAQ
+================================ */
+
 .faq-container {
   max-width: 700px;
   margin: 4rem auto 0;
@@ -632,8 +755,8 @@ section#contato {
   padding: 1.2rem;
   font-weight: 600;
   cursor: pointer;
-  position: relative;
   list-style: none;
+  position: relative;
 }
 
 .faq-item summary::after {
@@ -921,6 +1044,44 @@ footer {
     padding-bottom: 0 !important;
     height: 100%;
   }
+  .servico-bg {
+  position: absolute;
+  inset: -40%;
+  z-index: 0;
+  pointer-events: none;
+}
+/* ÍCONE PREMIUM (SVG) */
+.servico-icon-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  height: 160px;
+  transform: translate(-50%, -50%);
+  opacity: 0.12;
+  z-index: 1;
+  pointer-events: none;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+/* SVG DENTRO */
+.servico-icon-bg svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+    fill: rgba(255, 255, 255, 0.35);
+}
+
+/* COR BASE DO ÍCONE */
+.servico-icon-bg {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* HOVER (GANHA VIDA) */
+.servico-card:hover .servico-icon-bg {
+  opacity: 0.2;
+  transform: translate(-50%, -50%) scale(1.05) rotate(-4deg);
+}
 
   /* --- ESTILOS DO RODAPÉ DO MENU GAVETA --- */
 
