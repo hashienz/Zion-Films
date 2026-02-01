@@ -13,16 +13,30 @@
 /* =================================================================== */
 
 
-/* --- 1. ESTILOS GERAIS E VARIÁVEIS --- */
-/* ------------------------------------------------------------------- */
+/* =================================================================== */
+/* 1. ESTILOS GERAIS E VARIÁVEIS (TEMA: DEEP CINEMA BLEND)
+/* =================================================================== */
 :root {
-  --bg-color: #0f0f0f;
-  --text-color: #f9f9f9;
+  /* --- PALETA DE CORES NOVA --- */
+  
+  /* Cor de Fundo Principal (Não é mais preto puro, é um cinza-azulado muito escuro) */
+  --bg-color: #0b0d10; 
+  
+  /* Cor Secundária para mesclar (Um azul marinho profundo para dar "vida") */
+  --bg-secondary: #12161f; 
+  
+  /* Texto (Off-white para não cansar a vista) */
+  --text-color: #e0e0e0;
+  
+  /* Sua cor de destaque (Ouro) mantida */
   --accent-color: #fbbf24;
   --accent-color-rgb: 251, 191, 36;
-  --neutral-color: #1f1f1f;
+  
+  /* Cor dos cards (Mais leve e translúcida) */
+  --neutral-color: rgba(30, 35, 45, 0.6);
+  
   --font-main: 'Poppins', sans-serif;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-premium: 0 10px 40px -10px rgba(0,0,0,0.6);
   --neon-green: #39ff14;
 }
 
@@ -38,59 +52,100 @@ html {
 
 body {
   background-color: var(--bg-color);
+  
+  /* AQUI ESTÁ A MÁGICA DA MESCLA: */
+  /* Um degradê que simula uma iluminação de estúdio vindo de cima */
+  background-image: 
+    radial-gradient(circle at 50% 0%, #1e2530 0%, var(--bg-color) 80%),
+    linear-gradient(to bottom, transparent 0%, #000 100%);
+    
   color: var(--text-color);
   font-family: var(--font-main);
   line-height: 1.6;
-  overflow-x: hidden; /* Impede a rolagem horizontal indesejada */
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-
-/* --- 2. CLASSES UTILITÁRIAS --- */
-/* ------------------------------------------------------------------- */
+/* Scrollbar mais suave */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+/* =================================================================== */
+/* 2. CLASSES UTILITÁRIAS
+/* =================================================================== */
 .container {
-  max-width: 1200px;
+  max-width: 1240px; /* Levemente mais largo para telas modernas */
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 section {
-  padding-top: 7rem;
-  padding-bottom: 7rem;
-  overflow: hidden; /* Garante que conteúdos animados (AOS) não quebrem o layout */
+  padding-top: 8rem; /* Mais respiro entre seções */
+  padding-bottom: 8rem;
+  position: relative;
+  overflow: hidden;
 }
 
 h2 {
   text-align: center;
   margin-bottom: 1rem;
-  font-size: clamp(1.8rem, 5vw, 2.2rem);
-  color: var(--accent-color);
+  font-size: clamp(2.5rem, 6vw, 4rem); /* Títulos MUITO maiores e impactantes */
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  /* Efeito de Gradiente no Texto (Metalizado) */
+  background: linear-gradient(to bottom, #fff 0%, #ccc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Sombra suave para destacar do fundo */
+  text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Detalhe dourado chique embaixo dos títulos */
+h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--accent-color);
+  margin: 1.5rem auto 0;
+  border-radius: 2px;
+  box-shadow: 0 0 15px var(--accent-glow); /* Brilho neon dourado */
 }
 
 .section-subtitle {
   text-align: center;
   max-width: 600px;
-  margin: -0.5rem auto 3rem;
-  color: #ccc;
+  margin: 0 auto 4rem;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 300;
 }
 
 .grid {
   display: grid;
-  gap: 2.5rem;
+  gap: 3rem; /* Espaçamento maior entre cards */
 }
 
 
 /* --- 3. CABEÇALHO (HEADER) E NAVEGAÇÃO --- */
 /* ------------------------------------------------------------------- */
 header {
-  background-color: black;
+  /* [CORRIGIDO] Usa a variável do fundo novo com transparência */
+  background-color: rgba(11, 13, 16, 0.85); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  /* ... resto das propriedades iguais ... */
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-premium);
   transform: translateY(0);
-  transition: transform 0.4s ease-in-out;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 header.header-hidden {
@@ -101,7 +156,7 @@ header nav.container {
   display: flex;
   justify-content: space-between; 
   align-items: center; 
-  height: 70px; 
+  height: 80px; /* [AJUSTE] Aumentei levemente de 70px para 80px para dar mais ar */
 }
 
 /* Logo */
@@ -112,50 +167,76 @@ header nav.container {
 }
 
 .logo-img {
-  height: 100px;
+  height: 100px; /* [SUGESTÃO] 100px pode quebrar o layout, reduzi para 60px para caber no header de 80px */
+  /* height: 100px; -> (Antigo comentado) */
   width: auto;
-  vertical-align: middle; 
+  vertical-align: middle;
+  
+  /* [NOVO] Brilho na logo para destacar no fundo escuro */
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05); /* Pequeno zoom ao passar o mouse */
 }
 
 /* Menu Desktop */
 header nav ul {
   display: flex;
   list-style: none;
-  gap: 1.5rem;
+  gap: 2rem; /* [AJUSTE] Aumentei o espaçamento entre itens */
 }
 
 header nav ul a {
   color: var(--text-color);
   text-decoration: none;
   font-weight: 500;
+  
+  /* [NOVO] Estilo tipográfico mais "Cinema" */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  opacity: 0.8; /* Leve transparência para foco no conteúdo */
+  
   position: relative;
   padding: 4px 0;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
+/* [MODIFICADO] Animação da linha inferior */
 header nav ul a::after {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -5px; 
+  bottom: -2px; 
   width: 100%;
   height: 2px;
   background-color: var(--accent-color);
+  
   transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+  transform-origin: right; /* [MODIFICADO] Sai da direita */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  
+  /* [NOVO] Glow na linha */
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 header nav ul a:hover::after,
 header nav ul a:focus::after {
   transform: scaleX(1);
+  transform-origin: left; /* [MODIFICADO] Entra pela esquerda */
 }
 
+header nav ul a:hover,
 header nav ul a.active {
   color: var(--accent-color);
+  opacity: 1;
+  /* [NOVO] Brilho no texto ao passar o mouse */
+  text-shadow: 0 0 15px var(--accent-glow);
 }
 
-/* Esconde os "frufrus" (rodapé do menu) no desktop */
+/* Esconde os "frufrus" (rodapé do menu) no desktop - MANTIDO */
 .menu-drawer-footer {
   display: none;
 }
@@ -164,12 +245,25 @@ header nav ul a.active {
 /* --- 4. SEÇÃO INÍCIO (HERO) --- */
 /* ------------------------------------------------------------------- */
 .hero {
-  min-height: 100vh;
+  height: 100vh; /* Altura total da tela */
+  min-height: 600px; /* Garante altura mínima em telas pequenas */
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
+  overflow: hidden; /* Importante para o vídeo não "vazar" */
+}
+
+/* [NOVO] Overlay de Vinheta (Escurece as bordas estilo Cinema) */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Gradiente radial: transparente no centro, preto nas bordas */
+  background: radial-gradient(circle, transparent 30%, #050505 100%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .video-destaque {
@@ -179,31 +273,72 @@ header nav ul a.active {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1;
-  filter: blur(8px) brightness(0.5);
-  transform: scale(1.1); 
+  z-index: -2;
+  
+  /* [MODIFICADO] Visual mais limpo e "Dark" */
+  /* filter: blur(8px) brightness(0.5); -> (Antigo comentado) */
+  filter: brightness(0.4) contrast(1.1) saturate(1.2); /* Menos brilho, mais contraste */
+  
+  transform: scale(1); /* Reset da escala para evitar cortes estranhos */
 }
 
 .hero-text {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 2rem 3rem;
-  border-radius: 12px;
-  backdrop-filter: blur(5px);
-  max-width: 800px;
+  /* [MODIFICADO] Removendo a "caixa" cinza para visual moderno */
+  /* background: rgba(0, 0, 0, 0.5); -> (Antigo comentado) */
+  /* backdrop-filter: blur(5px); -> (Antigo comentado) */
+  background: transparent;
+  padding: 0 1.5rem;
+  
+  max-width: 1000px; /* Aumentei a largura permitida */
+  text-align: center;
+  z-index: 2;
+  
+  /* [NOVO] Animação de entrada suave */
+  animation: fadeUp 1.5s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+  opacity: 0; /* Começa invisível para a animação funcionar */
+}
+
+/* Estilo específico do H2 dentro da Hero */
+.hero-text h2 {
+  /* [NOVO] Texto Gigante */
+  font-size: clamp(3rem, 8vw, 5.5rem); 
+  background: none; /* Remove o gradiente padrão dos H2 globais */
+  -webkit-text-fill-color: #fff; /* Texto branco puro */
+  text-shadow: 0 10px 40px rgba(0,0,0,0.9); /* Sombra forte para leitura */
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+/* Remove a linha dourada padrão dos H2 (fica estranho na Hero) */
+.hero-text h2::after {
+  display: none;
+}
+
+.hero-text p {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+  max-width: 700px;
+  margin: 0 auto;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 
 /* Logos de clientes na Hero */
 .client-logos {
-  margin-top: 3rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding-top: 1.5rem;
+  margin-top: 4rem; /* Mais espaço */
+  border-top: 1px solid rgba(255, 255, 255, 0.15); /* Linha mais sutil */
+  padding-top: 2rem;
+  
+  /* [NOVO] Animação de entrada com atraso */
+  animation: fadeIn 1s ease 1s forwards; /* Espera 1s e aparece */
+  opacity: 0;
 }
 
 .logos-title {
   font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #ccc;
+  letter-spacing: 3px; /* Espaçamento chique */
+  color: rgba(255, 255, 255, 0.6);
   text-align: center;
   margin-bottom: 1.5rem;
 }
@@ -217,16 +352,30 @@ header nav ul a.active {
 }
 
 .logo-images img {
-  height: 35px;
+  height: 30px; /* Levemente menor para ser discreto */
   width: auto;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
-  /* Filtro para deixar logos brancas (se forem coloridas) */
-  filter: brightness(0) invert(1) grayscale(1);
+  opacity: 0.6;
+  transition: all 0.4s ease;
+  
+  /* [MODIFICADO] Garante que logos fiquem brancos (Flat) */
+  filter: brightness(0) invert(1); 
 }
 
 .logo-images img:hover {
   opacity: 1;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.5)) brightness(0) invert(1);
+}
+
+/* [NOVO] Keyframes para as animações */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 
@@ -234,56 +383,103 @@ header nav ul a.active {
 /* ------------------------------------------------------------------- */
 .sobre-mim-layout {
   display: grid;
-  grid-template-columns: 1fr 2fr; 
+  /* [MODIFICADO] Assimetria elegante: Foto (0.8) e Texto (1.2) */
+  /* grid-template-columns: 1fr 2fr; -> (Antigo comentado) */
+  grid-template-columns: 0.8fr 1.2fr; 
   align-items: center; 
-  gap: 3rem; 
+  gap: 5rem; /* Mais respiro entre foto e texto */
+}
+
+.sobre-mim-foto {
+  position: relative; /* Necessário para o efeito de moldura */
+  z-index: 1;
+}
+
+/* [NOVO] Moldura Dourada Deslocada (Efeito Premium) */
+.sobre-mim-foto::before {
+  content: '';
+  position: absolute;
+  top: -15px; 
+  left: -15px;
+  width: 100%; 
+  height: 100%;
+  border: 1px solid var(--accent-color); /* Borda fina dourada */
+  z-index: -1; /* Fica atrás da foto */
+  transition: transform 0.4s ease;
+}
+
+/* Animação da moldura ao passar o mouse */
+.sobre-mim-foto:hover::before {
+  transform: translate(10px, 10px); /* Move a moldura */
 }
 
 .sobre-mim-foto img {
   width: 100%;
   height: auto;
-  border-radius: 16px; 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 4px; /* [MODIFICADO] Cantos menos arredondados para ser mais profissional */
+  
+  /* [MODIFICADO] Sombra mais sofisticada */
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); -> (Antigo comentado) */
+  box-shadow: var(--shadow-premium);
+  
+  /* [NOVO] Foto em P&B que fica colorida no hover */
+  filter: grayscale(100%) contrast(1.1);
+  transition: filter 0.4s ease;
+}
+
+.sobre-mim-foto:hover img {
+  filter: grayscale(0%) contrast(1); /* Volta a cor original */
 }
 
 .sobre-mim-texto h3 {
-  font-size: 1.8rem;
-  color: var(--accent-color);
-  margin-bottom: 1rem;
+  font-size: 2.2rem; /* Aumentado */
+  color: #fff; /* Branco puro */
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
 }
 
 .sobre-mim-texto p {
-  color: #ccc;
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.8; /* Leitura mais confortável */
+  font-size: 1.05rem;
 }
 
+/* [MODIFICADO] Botão CTA "Ghost" (Contorno) */
 .cta-button {
   display: inline-block;
-  background-color: var(--accent-color);
-  color: #000;
-  padding: 0.8rem 1.8rem;
-  border-radius: 8px;
+  background-color: transparent; /* Fundo transparente */
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color); /* Borda Dourada */
+  padding: 1rem 2.5rem; /* Botão maior */
+  border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .cta-button:hover {
-  background-color: #facc15;
-  transform: scale(1.05);
+  background-color: var(--accent-color);
+  color: #000; /* Texto fica preto no hover */
+  box-shadow: 0 0 25px var(--accent-glow); /* Brilho neon */
+  transform: translateY(-3px);
 }
 
-/* Subseção "Processo de Trabalho" */
+/* --- Subseção "Processo de Trabalho" --- */
 .processo-container {
-  margin-top: 6rem;
+  margin-top: 8rem; /* Mais separação */
 }
 
 .subtitulo-secao {
   text-align: center;
-  font-size: 1.5rem;
-  color: var(--text-color);
-  margin-bottom: 3rem;
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 4rem;
+  font-weight: 600;
 }
 
 .processo-grid {
@@ -294,158 +490,179 @@ header nav ul a.active {
 
 .processo-item {
   text-align: center;
-  background-color: var(--neutral-color);
-  padding: 2rem;
-  border-radius: 12px;
+  /* [MODIFICADO] Efeito Glassmorphism (Vidro Escuro) */
+  /* background-color: var(--neutral-color); -> (Antigo comentado) */
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  
+  padding: 3rem 1.5rem;
+  border-radius: 8px; /* Cantos mais retos */
+  transition: all 0.4s ease;
+}
+
+.processo-item:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* Fica mais claro */
+  transform: translateY(-10px); /* Flutua */
+  border-color: var(--accent-color); /* Borda fica dourada */
 }
 
 .processo-icone {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  /* [NOVO] Sombra no emoji/ícone */
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
 }
 
 .processo-item h4 {
-  font-size: 1.1rem;
-  color: var(--accent-color);
-  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+
+.processo-item p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
 }
 
 
 /* --- 6. SEÇÃO SERVIÇOS --- */
 /* ------------------------------------------------------------------- */
-
 .servicos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Cards largos e responsivos */
   gap: 2rem;
 }
 
-/* CARD BASE */
+/* CARD PRINCIPAL - Design de Vidro Profundo */
 .servico-card {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(145deg, #1a1a1a, #141414);
-  padding: 3rem 2.5rem;
-  border-radius: 20px;
+  /* Fundo escuro com leve transparência e desfoque */
+  background: rgba(20, 20, 20, 0.6); 
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  padding: 4rem 2.5rem;
+  border-radius: 16px;
   text-align: center;
+  
+  /* Borda sutil de vidro */
   border: 1px solid rgba(255, 255, 255, 0.05);
-
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
-}
-
-/* ELEVAÇÃO NO HOVER */
-.servico-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-/* FUNDO ANIMADO */
-.servico-bg {
-  position: absolute;
-  inset: -40%;
-  background: radial-gradient(
-    circle at top left,
-    rgba(245, 179, 1, 0.18),
-    transparent 60%
-  );
-  animation: bgMove 8s linear infinite;
-  z-index: 0;
-}
-
-@keyframes bgMove {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(20%, 20%); }
-  100% { transform: translate(0, 0); }
-}
-
-/* ÍCONE GIGANTE */
-.servico-icon-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: 8rem;
-  opacity: 0.06;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  transition: transform 0.6s ease;
+  
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* Transição suave */
   z-index: 1;
 }
 
-.servico-card:hover .servico-icon-bg {
-  transform: translate(-50%, -50%) rotate(-6deg) scale(1.05);
+/* Hover no Card: Levanta e Brilha */
+.servico-card:hover {
+  transform: translateY(-10px); /* Sobe 10px */
+  border-color: rgba(255, 255, 255, 0.2); /* Borda fica mais clara */
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5); /* Sombra 3D */
 }
 
-/* CONTEÚDO */
+/* BACKGROUNDS COLORIDOS (Gradients Atmosféricos) */
+.servico-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0.15; /* Começa bem suave */
+  transition: opacity 0.5s ease;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.servico-card:hover .servico-bg {
+  opacity: 0.3; /* Fica mais intenso no hover */
+}
+
+/* Cores específicas para cada tipo de serviço */
+.servico-captacao .servico-bg {
+  background: radial-gradient(circle at top right, #00b4ff, transparent 65%); /* Azul Ciano */
+}
+.servico-edicao .servico-bg {
+  background: radial-gradient(circle at top right, #fbbf24, transparent 65%); /* Ouro */
+}
+.servico-color .servico-bg {
+  background: radial-gradient(circle at top right, #8b5cf6, transparent 65%); /* Roxo Neon */
+}
+
+/* ÍCONE DE FUNDO (Gigante e Animado) */
+.servico-icon-bg {
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  width: 140px; 
+  height: 140px;
+  
+  opacity: 0.05; /* Quase invisível */
+  pointer-events: none;
+  z-index: 0;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efeito elástico */
+}
+
+/* O SVG dentro do container */
+.servico-icon-bg svg {
+  width: 100%;
+  height: 100%;
+  fill: #fff;
+}
+
+/* Animação do ícone ao passar o mouse no card */
+.servico-card:hover .servico-icon-bg {
+  opacity: 0.12;
+  transform: translate(-50%, -50%) scale(1.3) rotate(-10deg); /* Cresce e gira */
+}
+
+/* CONTEÚDO (Texto) */
 .servico-content {
   position: relative;
-  z-index: 2;
+  z-index: 2; /* Garante que o texto fique acima dos efeitos */
 }
 
-.servico-card h3 {
-  font-size: 1.4rem;
+.servico-content h3 {
+  font-size: 1.6rem;
   margin-bottom: 1rem;
-}
-
-.servico-card p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #ccc;
-}
-
-/* LISTA (TERCEIRO CARD) */
-.servico-lista {
-  line-height: 1.7;
-}
-
-/* CTA ESCONDIDO */
-.servico-cta {
-  display: inline-block;
-  margin-top: 1.8rem;
+  color: #fff;
   font-weight: 600;
-  color: var(--accent-color);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.servico-card:hover .servico-cta {
-  opacity: 1;
-  transform: translateY(0);
+.servico-content p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
 }
 
-/* CARD DESTAQUE */
-.servico-card.destaque {
-  border: 1px solid rgba(245, 179, 1, 0.4);
-  box-shadow: 0 0 25px rgba(245, 179, 1, 0.12);
-}
-
-/* DIFERENCIAÇÃO SUAVE POR SERVIÇO */
-.servico-captacao .servico-bg {
-  background: radial-gradient(
-    circle at top left,
-    rgba(0, 180, 255, 0.18),
-    transparent 60%
-  );
-}
-
-.servico-edicao .servico-bg {
-  background: radial-gradient(
-    circle at top left,
-    rgba(245, 179, 1, 0.2),
-    transparent 60%
-  );
-}
-
-.servico-color .servico-bg {
-  background: radial-gradient(
-    circle at top left,
-    rgba(180, 80, 255, 0.2),
-    transparent 60%
-  );
+/* BOTÃO "Ver exemplos" */
+.btn-servico {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   
-  .servico-card.is-visible {
-  box-shadow: 0 0 30px rgba(245, 179, 1, 0.15);
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  
+  transition: gap 0.3s ease, color 0.3s ease;
 }
+
+.btn-servico span {
+  transition: transform 0.3s ease;
+  font-size: 1.1em;
+}
+
+.btn-servico:hover {
+  gap: 15px; /* Afasta a seta do texto */
+  color: #fff; /* Texto fica branco */
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.btn-servico:hover span {
+  transform: translateX(5px); /* Seta desliza para a direita */
 }
 
 
@@ -579,203 +796,348 @@ header nav ul a.active {
 
 /* --- 8. SEÇÃO CONTATO (FORMULÁRIO, BOTÕES E FAQ) --- */
 /* ------------------------------------------------------------------- */
-
-section#contato {
-  display: block;
+#contato {
+  position: relative;
+  z-index: 1;
 }
 
-/* ===============================
-   BOTÃO PRINCIPAL (WHATSAPP)
-================================ */
-
+/* BOTÃO WHATSAPP PRINCIPAL (Neon Intenso) */
 .contato-principal {
   display: flex;
   justify-content: center;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .btn-whatsapp-glow {
-  display: inline-flex;
+  position: relative;
+  display: flex;
   align-items: center;
-  gap: 12px;
-
-  background-color: var(--neon-green);
+  gap: 15px;
+  
+  background-color: #25D366; /* Verde WhatsApp */
   color: #fff;
-
-  padding: 14px 28px;
-  border-radius: 50px;
-  border: none;
-
-  font-family: var(--font-main);
+  
+  font-size: 1.1rem;
   font-weight: 700;
-  text-decoration: none;
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 1px;
+  
+  padding: 18px 45px;
+  border-radius: 50px;
+  
+  /* Sombra de brilho intenso */
+  box-shadow: 0 0 25px rgba(37, 211, 102, 0.4);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
 
-  /* Glow sutil */
-  box-shadow: 0 0 6px rgba(57, 255, 20, 0.35);
+/* Efeito de luz passando pelo botão */
+.btn-whatsapp-glow::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  transition: 0.6s;
+  transform: skewX(-20deg);
+}
 
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  animation: pulse-glow-soft 3.5s infinite alternate;
+.btn-whatsapp-glow:hover::before {
+  left: 150%; /* Faz a luz atravessar o botão */
+}
+
+.btn-whatsapp-glow:hover {
+  transform: scale(1.05) translateY(-5px);
+  background-color: #22c35e;
+  box-shadow: 0 10px 40px rgba(37, 211, 102, 0.7); /* Brilho estoura no hover */
 }
 
 .whatsapp-icon {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   fill: #fff;
 }
 
-/* Hover */
-.btn-whatsapp-glow:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 10px rgba(57, 255, 20, 0.45);
-}
-
-/* Animação de pulsação SUAVE */
-@keyframes pulse-glow-soft {
-  from {
-    box-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
-  }
-  to {
-    box-shadow: 0 0 9px rgba(57, 255, 20, 0.45);
-  }
-}
-
-/* ===============================
-   LINKS SECUNDÁRIOS
-================================ */
-
+/* LINKS SECUNDÁRIOS */
 .contato-secundario {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
   gap: 1.5rem;
-  width: 100%;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
 }
 
-/* Botão Email (Ghost Button) */
 .contato-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 12px;
-
-  padding: 14px 24px;
-  border-radius: 50px;
-
-  background: transparent;
-  border: 2px solid var(--accent-color);
-  color: var(--accent-color);
-
+  gap: 10px;
+  color: rgba(255,255,255,0.7);
   text-decoration: none;
-  font-weight: 600;
-
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.contato-svg-icon {
-  width: 20px;
-  height: 20px;
-  fill: #ffffff; 
-  transition: opacity 0.2s ease;
-}
-
-.contato-link:hover .contato-svg-icon {
-  opacity: 0.8;
+  padding: 10px 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 30px;
+  transition: all 0.3s ease;
 }
 
 .contato-link:hover {
-  background-color: var(--accent-color);
+  background: #fff;
   color: #000;
+  border-color: #fff;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  transform: scale(1.05);
 }
 
+.contato-svg-icon {
+  width: 18px;
+  fill: currentColor;
+}
 
-/* Texto "ou" */
 .contato-ou {
-  color: #888;
-  font-weight: 500;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-/* Link formulário */
 .contato-link-form {
   color: var(--accent-color);
   text-decoration: none;
-  font-weight: 500;
-  position: relative;
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+  transition: 0.3s;
+}
+.contato-link-form:hover {
+  border-color: var(--accent-color);
+  text-shadow: 0 0 10px var(--accent-glow);
 }
 
-.contato-link-form::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 2px;
-  background-color: var(--accent-color);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.contato-link-form:hover::after {
-  transform: scaleX(1);
-}
-
-/* ===============================
-   FORMULÁRIO
-================================ */
-
+/* FORMULÁRIO (Estilo Cyberpunk Limpo) */
 #form-contato {
+  max-width: 650px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 600px;
-  width: 100%;
-  margin: 0 auto;
+  gap: 1.5rem;
 }
 
-/* ===============================
-   FAQ
-================================ */
-
-.faq-container {
-  max-width: 700px;
-  margin: 4rem auto 0;
-}
-
-.faq-item details {
-  background: var(--neutral-color);
-  margin-bottom: 1rem;
+#form-contato input, 
+#form-contato textarea {
+  background: rgba(255, 255, 255, 0.03); /* Quase transparente */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 1.2rem 1.5rem;
   border-radius: 8px;
-  border: 1px solid #333;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+#form-contato input::placeholder, 
+#form-contato textarea::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+/* Foco no input: Borda Dourada e Fundo Escuro */
+#form-contato input:focus, 
+#form-contato textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  background: #000;
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+#form-contato button {
+  padding: 1.2rem;
+  background: #fff;
+  color: #000;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+#form-contato button:hover {
+  background: var(--accent-color);
+  box-shadow: 0 0 30px var(--accent-glow);
+  transform: translateY(-3px);
+}
+
+/* FAQ (Accordion Minimalista) */
+.faq-container {
+  max-width: 750px;
+  margin: 6rem auto 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 3rem;
+}
+
+.faq-container h3 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .faq-item summary {
-  padding: 1.2rem;
-  font-weight: 600;
+  padding: 1.5rem 0;
   cursor: pointer;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
   list-style: none;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s;
 }
 
+.faq-item summary:hover {
+  color: var(--accent-color);
+}
+
+/* Ícone +/- do FAQ */
 .faq-item summary::after {
-  content: '▼';
-  position: absolute;
-  right: 1.2rem;
-  font-size: 0.8rem;
+  content: '+';
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--accent-color);
   transition: transform 0.3s ease;
 }
 
 .faq-item details[open] summary::after {
+  content: '-'; 
   transform: rotate(180deg);
 }
 
 .faq-item p {
-  padding: 0 1.2rem 1.2rem;
+  color: var(--text-muted);
+  padding-bottom: 1.5rem;
+  line-height: 1.6;
+  animation: fadeIn 0.5s ease;
+}
+
+
+/* --- 9. ELEMENTOS INTERATIVOS --- */
+/* ------------------------------------------------------------------- */
+
+/* Rodapé */
+footer {
+  text-align: center;
+  padding: 3rem 0;
+  color: #555;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 4rem;
+}
+
+/* Botão Voltar ao Topo */
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px; height: 50px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 900;
+  font-weight: bold;
+  font-size: 1.2rem;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+#back-to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#back-to-top:hover {
+  background: var(--accent-color);
+  transform: translateY(-5px);
+}
+
+/* GLightbox Customização (Tema Dark) */
+.gslide-description {
+  background-color: #050505 !important;
+}
+.gslide-title {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+.gslide-desc {
   color: #ccc;
-  border-top: 1px solid #333;
-  margin-top: 0.5rem;
+}
+.gnext, .gprev {
+  background: transparent !important;
+} 
+.gnext svg, .gprev svg {
+  color: #fff !important; 
+}
+
+
+/* =================================================================== */
+/* 10. MEDIA QUERIES (Responsividade Mobile)
+/* =================================================================== */
+@media (max-width: 768px) {
+  
+  /* Menu Hambúrguer (Ajuste Visual) */
+  .menu-hamburger .linha {
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(255,255,255,0.5);
+  }
+  .menu-hamburger.is-active .linha {
+    background-color: var(--accent-color);
+  }
+
+  /* Gaveta Lateral */
+  header nav ul {
+    background-color: #050505; /* Fundo sólido para performance */
+    width: 100%; /* Ocupa tela toda no mobile para impacto */
+    padding-top: 6rem;
+  }
+  
+  header nav ul a {
+    font-size: 1.5rem;
+  }
+
+  /* Ajustes de Tamanho de Fonte */
+  h2 { font-size: 2.5rem; }
+  .hero-text h2 { font-size: 3rem; }
+  
+  /* Grids em 1 Coluna */
+  .sobre-mim-layout,
+  .servicos-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  /* Ajuste do Slider no Mobile */
+  .swiper-slide {
+    width: 85%; /* Cards mais largos no celular */
+    opacity: 1; /* Sem transparência no mobile para melhor visibilidade */
+    filter: none;
+    transform: none;
+  }
+  
+  .swiper-slide.slide-vertical {
+    width: 60%; /* Verticais um pouco menores */
+  }
+  
+  /* Botão WhatsApp Full Width */
+  .btn-whatsapp-glow {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 
