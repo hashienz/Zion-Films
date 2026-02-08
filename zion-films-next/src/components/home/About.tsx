@@ -80,7 +80,10 @@ export function About() {
                 </div>
 
                 {/* Process */}
-                <div className="mt-20">
+                <div className="mt-20 relative">
+                    {/* Connecting Line (Desktop) */}
+                    <div className="hidden lg:block absolute top-[140px] left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-zion-gold/30 to-transparent z-0" />
+
                     <motion.h3
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -90,20 +93,35 @@ export function About() {
                         Nosso Processo de Trabalho
                     </motion.h3>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Mobile: Horizontal Scroll (Carousel) | Desktop: Grid */}
+                    <div className="flex lg:grid lg:grid-cols-4 gap-6 overflow-x-auto pb-8 lg:pb-0 snap-x snap-mandatory scrollbar-hide -mx-6 px-6 lg:mx-0 lg:px-0">
                         {processSteps.map((step, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: step.delay, duration: 0.5 }}
-                                className="bg-white/5 border border-white/5 p-8 rounded-lg text-center hover:bg-white/10 hover:-translate-y-2 transition-all duration-300 border-transparent hover:border-zion-gold"
+                                transition={{ delay: index * 0.1, duration: 0.5 }}
+                                className="min-w-[280px] bg-white/5 border border-white/5 p-8 rounded-2xl text-center hover:bg-white/10 transition-all duration-300 border-transparent hover:border-zion-gold relative group snap-center"
                             >
-                                <step.icon className="w-12 h-12 text-zion-gold mx-auto mb-6 drop-shadow-glow" />
-                                <h4 className="text-xl font-bold text-white mb-3">{step.title}</h4>
-                                <p className="text-gray-400 text-sm">{step.description}</p>
+                                {/* Step Number Background */}
+                                <div className="absolute -top-6 -left-4 text-6xl font-bold font-outfit text-white/5 z-0 group-hover:text-zion-gold/10 transition-colors pointer-events-none">
+                                    0{index + 1}
+                                </div>
+
+                                <div className="relative z-10 bg-zion-dark/50 rounded-full p-4 inline-block mb-6 border border-white/10 group-hover:border-zion-gold/50 transition-colors">
+                                    <step.icon className="w-8 h-8 text-zion-gold drop-shadow-glow" />
+                                </div>
+
+                                <h4 className="relative z-10 text-xl font-bold text-white mb-3 font-outfit">{step.title.split('. ')[1]}</h4>
+                                <p className="relative z-10 text-gray-400 text-sm font-inter leading-relaxed">{step.description}</p>
                             </motion.div>
+                        ))}
+                    </div>
+                    {/* Mobile Swipe Indicator */}
+                    <div className="flex justify-center mt-4 gap-1 lg:hidden">
+                        {processSteps.map((_, i) => (
+                            <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/20" />
                         ))}
                     </div>
                 </div>

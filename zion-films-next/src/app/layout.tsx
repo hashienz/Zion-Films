@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google"; // Importa a fonte
+import { Outfit, Inter } from "next/font/google"; // Importa as fontes
 import "./globals.css"; // Importa os estilos
 import { Header } from "@/components/ui/Header"; // Importa o Header
 import { Footer } from "@/components/ui/Footer"; // Importa o Footer
 
-const poppins = Poppins({
+const outfit = Outfit({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
+  variable: "--font-outfit",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -22,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`${poppins.variable} font-poppins bg-zion-dark text-white`}>
+    <html lang="pt-BR" className={`${outfit.variable} ${inter.variable}`}>
+      <body className="font-sans bg-zion-dark text-white">
         <Header />
         <main>{children}</main>
         <Footer />
