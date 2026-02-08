@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+// teste de deploy
 
 export function Hero() {
     return (
