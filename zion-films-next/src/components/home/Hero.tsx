@@ -51,9 +51,9 @@ export function Hero() {
                     transition={{ duration: 1.2, delay: 0.8 }}
                     className="border-t border-white/10 pt-10"
                 >
-                    <p className="font-outfit text-xs uppercase tracking-[0.3em] text-zion-gold mb-8 opacity-80">
+                    {/* <p className="font-outfit text-xs uppercase tracking-[0.3em] text-zion-gold mb-8 opacity-80">
                         Trusted Partners
-                    </p>
+                    </p> */}
                     <div className="flex justify-center items-center gap-12 md:gap-20 flex-wrap opacity-60 hover:opacity-100 transition-opacity duration-500">
                         <div className="relative w-32 h-14 md:w-40 md:h-16 grayscale hover:grayscale-0 transition-all duration-300 invert brightness-0 hover:invert-0 hover:brightness-100">
                             <Image src="/img/logo.png" alt="Servopa" fill className="object-contain" />

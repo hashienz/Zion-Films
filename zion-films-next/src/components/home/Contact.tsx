@@ -12,7 +12,7 @@ const faqs = [
     },
     {
         question: "Quanto custa os serviços?",
-        answer: "Cada projeto possui necessidades diferentes. Entre em contato e consulte nossos pacotes com o filmmaker.",
+        answer: "Cada projeto possui necessidades diferentes. Entre em contato e consulte o preço com o filmmaker.",
     },
     {
         question: "Como funciona o pagamento?",

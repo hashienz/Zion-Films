@@ -34,7 +34,7 @@ const processSteps = [
 
 export function About() {
     return (
-        <section id="sobre" className="py-20 bg-zion-dark">
+        <section id="sobre" className="py-20 bg-zion-dark overflow-hidden">
             <div className="container-custom">
                 <h2 className="text-center text-4xl md:text-5xl font-bold mb-16 h2-gradient">
                     Somos a ZionFilms
@@ -94,7 +94,16 @@ export function About() {
                     </motion.h3>
 
                     {/* Mobile: Horizontal Scroll (Carousel) | Desktop: Grid */}
-                    <div className="flex lg:grid lg:grid-cols-4 gap-6 overflow-x-auto pb-8 lg:pb-0 snap-x snap-mandatory scrollbar-hide -mx-6 px-6 lg:mx-0 lg:px-0">
+                    <div className="
+                        flex lg:grid lg:grid-cols-4 
+                        gap-4 lg:gap-6 
+                        overflow-x-auto lg:overflow-visible
+                        pb-12 lg:pb-0 
+                        snap-x snap-mandatory 
+                        scrollbar-hide 
+                        -mx-6 px-6 lg:mx-0 lg:px-0
+                        items-stretch
+                    ">
                         {processSteps.map((step, index) => (
                             <motion.div
                                 key={index}
@@ -102,24 +111,37 @@ export function About() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                                className="min-w-[280px] bg-white/5 border border-white/5 p-8 rounded-2xl text-center hover:bg-white/10 transition-all duration-300 border-transparent hover:border-zion-gold relative group snap-center"
+                                className="
+                                    w-[85vw] lg:w-auto flex-shrink-0
+                                    bg-white/5 border border-white/5 
+                                    p-6 md:p-8 
+                                    rounded-2xl text-center 
+                                    hover:bg-white/10 transition-all duration-300 
+                                    hover:border-zion-gold relative group 
+                                    snap-center
+                                    overflow-hidden
+                                "
                             >
-                                {/* Step Number Background */}
-                                <div className="absolute -top-6 -left-4 text-6xl font-bold font-outfit text-white/5 z-0 group-hover:text-zion-gold/10 transition-colors pointer-events-none">
+                                {/* Step Number Background 
+                                    - Adicionado 'overflow-hidden' no pai (div acima)
+                                    - Ajustado top/left para não cortar errado no mobile
+                                */}
+                                <div className="absolute -top-2 -left-2 md:-top-6 md:-left-4 text-6xl md:text-8xl font-bold font-outfit text-white/5 z-0 group-hover:text-zion-gold/10 transition-colors pointer-events-none select-none">
                                     0{index + 1}
                                 </div>
 
-                                <div className="relative z-10 bg-zion-dark/50 rounded-full p-4 inline-block mb-6 border border-white/10 group-hover:border-zion-gold/50 transition-colors">
-                                    <step.icon className="w-8 h-8 text-zion-gold drop-shadow-glow" />
+                                <div className="relative z-10 bg-zion-dark/50 rounded-full p-4 inline-block mb-4 md:mb-6 border border-white/10 group-hover:border-zion-gold/50 transition-colors">
+                                    <step.icon className="w-6 h-6 md:w-8 md:h-8 text-zion-gold drop-shadow-glow" />
                                 </div>
 
-                                <h4 className="relative z-10 text-xl font-bold text-white mb-3 font-outfit">{step.title.split('. ')[1]}</h4>
+                                <h4 className="relative z-10 text-lg md:text-xl font-bold text-white mb-2 md:mb-3 font-outfit">{step.title.split('. ')[1]}</h4>
                                 <p className="relative z-10 text-gray-400 text-sm font-inter leading-relaxed">{step.description}</p>
                             </motion.div>
                         ))}
                     </div>
+                    
                     {/* Mobile Swipe Indicator */}
-                    <div className="flex justify-center mt-4 gap-1 lg:hidden">
+                    <div className="flex justify-center -mt-4 gap-1 lg:hidden">
                         {processSteps.map((_, i) => (
                             <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/20" />
                         ))}
