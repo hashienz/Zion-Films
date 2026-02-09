@@ -81,7 +81,8 @@ export function Portfolio() {
                             {projects.map((item) => (
                                 <motion.div
                                     key={item._id}
-                                    className="min-w-[320px] md:min-w-[500px] relative group rounded-3xl overflow-hidden aspect-video bg-gray-900 border border-white/10 shadow-lg hover:shadow-glow transition-all duration-500"
+                                    className="min-w-[320px] md:min-w-[500px] relative group rounded-3xl overflow-hidden aspect-video bg-gray-900 border border-white/10 shadow-lg hover:shadow-glow transition-all duration-500 cursor-pointer"
+                                    onClick={() => setSelectedVideo(item.videoUrl)}
                                 >
                                     {item.coverImage && (
                                         <Image
@@ -96,10 +97,10 @@ export function Portfolio() {
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
 
                                     {/* Play Button */}
-                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
+                                    <div className="absolute inset-0 flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 pointer-events-none">
                                         <button
                                             onClick={() => setSelectedVideo(item.videoUrl)}
-                                            className="w-20 h-20 bg-zion-gold/90 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform scale-50 group-hover:scale-100 transition-all duration-500 hover:bg-white hover:text-zion-gold shadow-glow"
+                                            className="w-20 h-20 bg-zion-gold/90 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform scale-100 md:scale-50 group-hover:scale-100 transition-all duration-500 hover:bg-white hover:text-zion-gold shadow-glow pointer-events-auto"
                                         >
                                             <Play fill="currentColor" className="ml-1 w-8 h-8" />
                                         </button>
